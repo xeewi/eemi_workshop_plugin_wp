@@ -52,12 +52,12 @@ class WpSlackManager {
 -------------------------- */
 	public function admin_main_menu(){
 		add_menu_page( 'Slack Manager', 
-			'Slack',
+			'Slack Manager',
 			'administrator',
 			'slack_manager/home',
 			[$this->_views, 'home'],
-			'dashicons-tickets',
-			6 );
+			plugins_url('wpSlackManager/asset/img/icon-menu.svg')
+			);
 
 	}
 }
