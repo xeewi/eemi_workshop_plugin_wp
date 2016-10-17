@@ -3,6 +3,7 @@
 Manage your Slack team from your Wordpress Admin.
 
 * Author : Xeewi
+* License : MIT License
 
 ***
 
