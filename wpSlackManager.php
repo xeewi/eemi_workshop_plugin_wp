@@ -9,8 +9,9 @@
 * License: WTFPL
 */
 
-// Test if WP
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+
+// Check if WP
 if ( ! defined( 'WPINC' ) ) {
 	exit; // Exit if not WP
 }
-
