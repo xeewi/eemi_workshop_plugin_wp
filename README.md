@@ -1,13 +1,14 @@
 # EEMI Workshop : Plugin Wordpress
+# WP Slack notifications
 
 * Author : Xeewi
 
 ***
 
-## WP Slack notifications
-
-### Summary
+## Summary
 
 * [General](#general)
 
-### General
+***
+
+## General
