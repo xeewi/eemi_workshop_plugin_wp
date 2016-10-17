@@ -15,3 +15,7 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 if ( ! defined( 'WPINC' ) ) {
 	exit; // Exit if not WP
 }
+
+require_once('class/WpSlackManager.class.php');
+
+$manager = new WpSlackManager;
