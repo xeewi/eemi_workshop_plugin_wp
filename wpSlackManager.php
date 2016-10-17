@@ -10,13 +10,10 @@
 */
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
-
-// Check if WP
-if ( ! defined( 'WPINC' ) ) {
-	exit; // Exit if not WP
-}
+if ( ! defined( 'WPINC' ) ) { exit; }
 
 require_once('class/WpSlackManager.class.php');
 
 $manager = new WpSlackManager;
-var_dump($manager->get_table_name());
+
+add_action( 'admin_menu', array($manager, 'admin_main_menu') );

@@ -1,5 +1,7 @@
 <?php
 
+require_once('WpSlackManager.views.php');
+
 class WpSlackManager {
 
 /*	Construct
@@ -7,10 +9,12 @@ class WpSlackManager {
 	function __construct(){
 		$this->set_wpdb();
 		$this->set_table_name();
+		$this->set_views();
 	}
 
 /*	Proprieties
 -------------------------- */
+	private $_views;
 	private $_wpdb;
 	private $_table_name;
 
@@ -24,6 +28,9 @@ class WpSlackManager {
 		return $this->_table_name;
 	}
 
+	public function get_views(){
+		return $this->_views;
+	}
 
 /*	Setters
 -------------------------- */
@@ -37,4 +44,20 @@ class WpSlackManager {
 		$this->_table_name = $this->_wpdb->prefix . "slack_manager";
 	}
 
+	private function set_views(){
+		$this->_views = new WpSlackManagerViews;
+	}
+
+/*	Functions
+-------------------------- */
+	public function admin_main_menu(){
+		add_menu_page( 'Slack Manager', 
+			'Slack',
+			'administrator',
+			'slack_manager/home',
+			[$this->_views, 'home'],
+			'dashicons-tickets',
+			6 );
+
+	}
 }
