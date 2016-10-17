@@ -1,15 +1,16 @@
 <?php
 
-require_once('WpSlackManager.views.php');
+require_once('wpSlackManager.views.php');
 
-class WpSlackManager {
+class wpSlackManager {
 
 /*	Construct
 -------------------------- */
 	function __construct(){
 		$this->set_wpdb();
 		$this->set_table_name();
-		$this->set_views();
+		$this->_views = new WpSlackManagerViews;
+		$this->_url = wpSM_URL;
 	}
 
 /*	Proprieties
@@ -17,6 +18,7 @@ class WpSlackManager {
 	private $_views;
 	private $_wpdb;
 	private $_table_name;
+	private $_url;
 
 /*	Getters
 -------------------------- */
@@ -32,6 +34,10 @@ class WpSlackManager {
 		return $this->_views;
 	}
 
+	public function get_url(){
+		return $this->_url;
+	}
+
 /*	Setters
 -------------------------- */
 	private function set_wpdb(){
@@ -44,10 +50,6 @@ class WpSlackManager {
 		$this->_table_name = $this->_wpdb->prefix . "slack_manager";
 	}
 
-	private function set_views(){
-		$this->_views = new WpSlackManagerViews;
-	}
-
 /*	Functions
 -------------------------- */
 	public function admin_main_menu(){
@@ -55,9 +57,8 @@ class WpSlackManager {
 			'Slack Manager',
 			'administrator',
 			'slack_manager/home',
-			[$this->_views, 'home'],
+			[$this->_views, 'home_admin'],
 			plugins_url('wpSlackManager/asset/img/icon-menu.svg')
-			);
-
+		);
 	}
 }
