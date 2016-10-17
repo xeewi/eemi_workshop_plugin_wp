@@ -19,3 +19,4 @@ if ( ! defined( 'WPINC' ) ) {
 require_once('class/WpSlackManager.class.php');
 
 $manager = new WpSlackManager;
+var_dump($manager->get_table_name());
