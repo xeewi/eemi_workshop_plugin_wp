@@ -1,4 +1,4 @@
-# WP Slack notifications
+# WpSlackManager
 
 EEMI Workshop : Plugin Wordpress
 

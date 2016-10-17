@@ -8,3 +8,9 @@
 * Author URI: https://github.com/xeewi/
 * License: WTFPL
 */
+
+// Test if WP
+if ( ! defined( 'WPINC' ) ) {
+	exit; // Exit if not WP
+}
+
