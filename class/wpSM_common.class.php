@@ -1,6 +1,6 @@
 <?php
 
-class wpSlackManagerCommon {
+class wpSM_common {
 	
 	private $_NAME;
 	private $_SITE_URL;
