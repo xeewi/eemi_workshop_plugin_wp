@@ -13,11 +13,9 @@
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 if ( ! defined( 'WPINC' ) ) { exit; }
 
-define( 'wpSM_PATH', plugin_dir_path( __FILE__ ) );
-define( 'wpSM_URL',  plugins_url( 'wpSlackManager/' ) );
-
 require_once( 'class/wpSlackManager.class.php' );
 
 $manager = new wpSlackManager;
 
-add_action( 'admin_menu', array( $manager, 'admin_main_menu' ) );
+add_action( 'plugins_loaded', array( $manager, 'load_text_domain' ) );
+add_action( 'admin_menu', array( $manager, 'admin_main_menu_disconnected' ) );

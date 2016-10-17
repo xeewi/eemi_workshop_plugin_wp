@@ -1,18 +1,14 @@
 <?php
 
-class wpSlackManagerViews {
+class wpSlackManagerViews extends wpSlackManagerCommon {
 	
 	function __construct(){
-		$this->_path = wpSM_PATH;
+		parent::__construct();
 	}
 
-	private $_path;
-
-	private function get_path(){
-		return $this->_path;
-	}
-
-	public function home_admin(){
-		require_once( $this->get_path() . 'views/home_admin.php' );
+	public function home_admin_disconnected(){
+		$redirect_uri = parent::get_SITE_URL() . '/wp-admin/admin.php?page=slack_manager.connect';
+		$connect = __( 'Click to authorize wpSlackManager to manage your Slack team !', parent::get_NAME() );
+		require_once( parent::get_PLUGIN_PATH() . 'views/home_admin.php' );
 	}
 }
