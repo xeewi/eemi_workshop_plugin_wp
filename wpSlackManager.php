@@ -13,13 +13,8 @@
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 if ( ! defined( 'WPINC' ) ) { exit; }
 
-// Common part
-require_once( 'class/wpSM_common.class.php' );
+require('class/wpSM_token.class.php');
+require('service/wp_SM_token.service.php');
 
-// Connection module
-require_once( 'class/wpSM_connect.class.php' );
-
-// Final module
-require_once( 'class/wpSM.class.php' );
-
-$manager = new wpSM;
+$token_service = new wpSM_token_service; 
+$token = new wpSM_token;

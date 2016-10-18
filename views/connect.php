@@ -2,7 +2,7 @@
 
 	<h2>Slack Manager</h2>
 	
-	<p><?php echo $connect ?></p>
+	<p><?php echo __( 'Click to connect your Slack account !', parent::get_NAME() ); ?></p>
 
 	<p>
 		<a href="https://slack.com/oauth/authorize?scope=identity.basic&client_id=your_client_id">
