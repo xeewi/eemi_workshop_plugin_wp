@@ -27,14 +27,14 @@ class wpSM_token_object {
 	public function scope(){ return $this->_scope; }
 	public function team_id(){ return $this->_team_id; }
 
-	public function set_user_id($value){
-		if ( !is_int($value) ) { return false; }
-		$this->_user_id = $value;
-	}
-
 	public function set_access_token($value){
 		if ( !is_string($value) ){ return false; }
 		$this->_access_token = $value;
+	}
+
+	public function set_user_id($value){
+		if ( !is_int($value) ) { return false; }
+		$this->_user_id = $value;
 	}
 
 	public function set_scope( $value ) {
