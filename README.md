@@ -16,6 +16,8 @@ Manage your Slack team from your Wordpress Admin.
 
 ## General
 
+Coming soon
+
 ***
 
 ## Subject

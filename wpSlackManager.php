@@ -13,8 +13,6 @@
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 if ( ! defined( 'WPINC' ) ) { exit; }
 
-require('class/wpSM_token.class.php');
-require('service/wp_SM_token.service.php');
+require_once('class/wpSM.class.php');
 
-$token_service = new wpSM_token_service; 
-$token = new wpSM_token;
+$manager = new wpSM;
