@@ -30,7 +30,8 @@ class wpSM_token_service {
 
 		$charset_collate = $wpdb->get_charset_collate();
 		
-		$sql = "CREATE TABLE IF NOT EXISTS $this->_table_name (
+		$sql = "
+		CREATE TABLE IF NOT EXISTS $this->_table_name (
 		  id mediumint(9) NOT NULL AUTO_INCREMENT,
 		  user_id bigint(20) UNSIGNED NOT NULL,
 		  access_token varchar(255) NOT NULL,
@@ -38,7 +39,7 @@ class wpSM_token_service {
 		  team_id varchar(255) NOT NULL,
 		  PRIMARY KEY  (id),
 		  FOREIGN KEY (user_id) REFERENCES " . $wpdb->prefix . "users(ID)
-		) $charset_collate;";
+		) $charset_collate; ";
 
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $sql );
