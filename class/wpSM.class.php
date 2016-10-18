@@ -13,14 +13,14 @@ class wpSM {
 		$this->modules = Array(
 			'token' => new wpSM_token,
 		);
+		
 
 		add_action('wp_loaded', Array($this, "wp_loaded"));
 	}
 
 	public function wp_loaded(){
-		
 		$this->_token = $this->modules['token']->get();
-
+		
 		if ( $this->_token->access_token() ) {
 			$this->connected();
 		} else {

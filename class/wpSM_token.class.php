@@ -12,11 +12,16 @@ class wpSM_token {
 
 	public function get(){
 		$token = new wpSM_token_object;
-		$this->_service->get($token);
+		$this->_service->get( $token );
+		if ( !$token->id() ) {
+			$this->_service->add($token);
+		}
 		return $token;
 	}
 
-	public function add($values){
-
+	public function add_clients($token, $client_id, $client_secret){
+		if ( get_class($token) != "wpSM_token_object" ){ return false; }
+		if ( $token->access_token() ) { return false; } // Must revock access of current client before change client
+		
 	}	
 }
