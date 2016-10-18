@@ -13,6 +13,13 @@
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 if ( ! defined( 'WPINC' ) ) { exit; }
 
+// Common part
+require_once( 'class/wpSM_common.class.php' );
+
+// Connection module
+require_once( 'class/wpSM_connect.class.php' );
+
+// Final module
 require_once( 'class/wpSM.class.php' );
 
 $manager = new wpSM;
