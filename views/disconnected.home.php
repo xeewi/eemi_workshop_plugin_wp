@@ -67,7 +67,7 @@
 				</a>
 			</p>
 		<?php } else { ?>
-			<p><?php echo __( "Requires Step 2", "wpSlackManager" ) ?></p>
+			<p><?php echo __( "Complete Step 3 before connect your account !", "wpSlackManager" ) ?></p>
 		<?php } ?>
 	</div>
 	

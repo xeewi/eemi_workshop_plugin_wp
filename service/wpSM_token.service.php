@@ -53,13 +53,34 @@ class wpSM_token_service {
 
 		$sql = Array();
 
-		if ( $object->wp_user_ID() ) 	{ $sql['wp_user_ID']    = esc_sql( $object->wp_user_ID() ); }
-		if ( $object->access_token() ) 	{ $sql['access_token']  = esc_sql( $object->access_token() ); }
-		if ( $object->user_id() ) 		{ $sql['user_id']       = esc_sql( $object->user_id() ); }
-		if ( $object->team_id() ) 		{ $sql['team_id']       = esc_sql( $object->team_id() ); }
-		if ( $object->scope() ) 		{ $sql['scope']         = esc_sql( $object->scope() ); }
-		if ( $object->client_id() ) 	{ $sql['client_id']     = esc_sql( $object->client_id() ); }
-		if ( $object->client_secret() ) { $sql['client_secret'] = esc_sql( $object->client_secret() ); }
+		if ( $object->wp_user_ID() ) { 
+			$sql['wp_user_ID'] = esc_sql( $object->wp_user_ID() ); 
+		}
+
+		if ( $object->access_token() ) { 
+			$sql['access_token'] = esc_sql( $object->access_token() ); 
+		} else { $sql['access_token'] = NULL; }
+
+		if ( $object->user_id() ) { 
+			$sql['user_id'] = esc_sql( $object->user_id() ); 
+		} else { $sql['user_id'] = NULL; }
+
+		if ( $object->team_id() ) { 
+			$sql['team_id'] = esc_sql( $object->team_id() ); 
+		} else { $sql['team_id'] = NULL; }
+
+		if ( $object->scope() ) { 
+			$sql['scope'] = esc_sql( $object->scope() ); 
+		} else { $sql['scope'] = NULL; }
+
+		if ( $object->client_id() ) { 
+			$sql['client_id'] = esc_sql( $object->client_id() ); 
+		} else { $sql['client_id'] = NULL; }
+
+		if ( $object->client_secret() ) { 
+			$sql['client_secret'] = esc_sql( $object->client_secret() ); 
+		} else { $sql['client_secret'] = NULL; }
+
 
 		$wpdb->update( $this->_table_name, $sql, Array( "id" => $object->id() ) );
 	}
