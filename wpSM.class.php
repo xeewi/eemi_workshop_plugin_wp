@@ -49,7 +49,7 @@ class wpSM {
 		$this->set_token();
 
 		if ( $this->_token->access_token() ) {
-			$this->dashboard();
+			$this->connected();
 		} else {
 			$this->auth();
 		}
@@ -59,12 +59,12 @@ class wpSM {
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	// Init auth
 	public function auth(){
-		add_action( 'admin_menu', Array( $this, 'auth_menu_auth' ) );
+		add_action( 'admin_menu', Array( $this, 'auth_menu' ) );
 		add_action( 'admin_post_add_clients_discnt', Array( $this, 'auth_add_clients' ) );
 	}
 
-	// Add pages
-	public function auth_menu_auth(){
+	// Add menu pages
+	public function auth_menu(){
 		if ( isset( $_GET['page'] ) && isset( $_GET['code'] ) && $_GET['page'] == "wpsm.auth" ) {
 			$this->auth_user( $_GET['code'] );
 			return false;
@@ -74,13 +74,13 @@ class wpSM {
 			'Slack Manager', 
 			'administrator', 
 			'wpsm.auth', 
-			Array( $this, "auht_home" ), 
+			Array( $this, "auth_home" ), 
 			plugins_url( '/wpSlackManager/asset/img/icon-menu.svg' ) 
 		);
 	}
 
 	// Auth config page
-	public function auht_home(){
+	public function auth_home(){
 		if ( isset($_GET['error']) && $_GET['error'] == "post" ) { $post_error = true; }
 		if ( isset($_GET['error']) && $_GET['error'] == "access_denied" ) { $access_error = true; }
 		if ( isset($_GET['success']) && $_GET['success'] == "post" ) { $post_success = true; }
@@ -116,10 +116,30 @@ class wpSM {
 		exit;
 	}
 
+
+/*	Connected commons
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+	// Init connected
+	public function connected(){
+		add_action( "admin_menu", Array( $this, 'connected_menu' ) );
+	}
+
+	// Add menu pages
+	public function connected_menu(){
+		add_menu_page( __('Dashboard : Slack Manager', 'wpSlackManager'), 
+			'Slack Manager', 
+			'administrator', 
+			'wpsm.dashboard', 
+			Array( $this, "dashboard" ), 
+			plugins_url( '/wpSlackManager/asset/img/icon-menu.svg' ) 
+		);
+	}
+
 /*	Dashboard
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+	// Init dashboard
 	public function dashboard(){
-		var_dump( "connected" );
+		
 	}
 
 }
