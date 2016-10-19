@@ -16,3 +16,6 @@ if ( ! defined( 'WPINC' ) ) { exit; }
 require_once('class/wpSM.class.php');
 
 $manager = new wpSM;
+
+add_action( 'admin_enqueue_scripts', Array( $manager, "add_scripts" ) );
+add_action( 'init', Array( $manager, "init" ) );

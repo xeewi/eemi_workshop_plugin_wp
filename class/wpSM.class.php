@@ -9,25 +9,29 @@ class wpSM {
 	public $modules;
 
 	public function __construct(){
-		
 		$this->modules = Array(
 			'token' => new wpSM_token,
 		);
-		add_action( 'admin_enqueue_scripts', Array( $this, "add_style" ) );
-		add_action( 'wp_loaded', Array( $this, "wp_loaded" ) );
 	}
 
-	public function add_style(){
+	public function token(){
+		return $this->_token;
+	}
+
+	public function set_token(){
+		$this->_token = $this->modules['token']->get();
+	}
+
+	public function add_scripts(){
 		wp_enqueue_style( 'wpSM_fonts', WP_PLUGIN_URL . "/wpSlackManager/asset/css/wpSM.fonts.css", false );
 		wp_enqueue_style( 'wpSM', WP_PLUGIN_URL . "/wpSlackManager/asset/css/wpSM.css", false );
 	}
 
 
-	public function wp_loaded(){
-
+	public function init(){
 		if ( !current_user_can("administrator") ) { return false; }
 
-		$this->_token = $this->modules['token']->get();
+		$this->set_token();
 
 		if ( $this->_token->access_token() ) {
 			$this->connected();
@@ -43,6 +47,7 @@ class wpSM {
 
 	public function disconnected(){
 		add_action( 'admin_menu', Array( $this, 'menu_discnt' ) );
+		add_action( 'admin_post_add_clients_discnt', Array( $this, 'add_clients_discnt' ) );
 	}
 
 	public function menu_discnt(){
@@ -58,17 +63,25 @@ class wpSM {
 			__( 'Return : Slack Manager', 'wpSlackManager' ),
 			__( 'Return', 'wpSlackManager' ), 
 			'administrator', 
-			'wpsm.disconnected.return', 
+			'wpsm.return_uri', 
 			Array( $this, "return_discnt" ) );
 	}
 
 	public function home_discnt(){
-		if ( !$this->_token->client_id() ) {  }
-
+		
+		if ( isset($_GET['error']) && $_GET['error'] == "post" ) { $post_error = true; }
+		
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/disconnected.home.php' );
 	}
 
 	public function return_discnt(){
 		var_dump($this->_token);
 	}
+
+	public function add_clients_discnt(){
+		var_dump($_POST);
+		wp_redirect( "admin.php?page=wpsm.disconnected.home&error=post" );
+		exit;
+	}
+
 }
