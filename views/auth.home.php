@@ -2,6 +2,8 @@
 
 	<h2><i class="fa fa-slack" aria-hidden="true"></i> Slack Manager</h2>
 
+	<!--	Error alerts
+	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
 	<?php if ( isset($post_error) ) { ?>
 		<div class="alert error">
 			<p>
@@ -11,6 +13,17 @@
 		</div>
 	<?php } ?>
 
+	<?php if ( isset($access_error) ) { ?>
+		<div class="alert error">
+			<p>
+				<i class="fa fa-exclamation-circle" aria-hidden="true"></i> 
+				<?php echo __( "Access denied ! Connection failed", "wpSlackManager" ); ?>
+			</p>
+		</div>
+	<?php } ?>
+
+	<!--	Success alerts
+	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
 	<?php if ( isset($post_success) ) { ?>
 		<div class="alert success">
 			<p>
@@ -20,6 +33,8 @@
 		</div>
 	<?php } ?>
 	
+	<!--	Step 1
+	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
 	<div class="card">
 		<h3><?php echo __( 'Step 1 : Create your app', "wpSlackManager" ); ?></h3>
 		<p class="ps"><?php echo __( '* If you already got a Slack APP, you can skip this Step and directly go to Step 2', 'wpSlackManager' ); ?></p>
@@ -34,16 +49,20 @@
 		</p>
 	</div>
 
+	<!--	Step 2
+	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
 	<div class="card">
 		<h3><?php echo __( "Step 2 : Add Return URI to your Slack App", "wpSlackManager" ); ?></h3>
 		<p class="ps" > <a target="_blank" href="https://api.slack.com/apps"><?php echo __( "Select your app", "wpSlackManager" ); ?></a> > OAuth & Permissions </p>
 		<p><?php echo __("Copy and paste the following return URI to your Slack App.", "wpSlackManager" ); ?></p>
 		<form>
 			<label for="return_uri" >Return URI</label>
-			<input type="text" readonly name="return_uri" value="<?php echo get_site_url(); ?>/wp-admin/admin.php?page=wpsm.return_uri">
+			<input type="text" readonly name="return_uri" value="<?php echo get_site_url(); ?>/wp-admin/admin.php?page=wpsm.auth">
 		</form>
 	</div>
 
+	<!--	Step 3
+	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
 	<div class="card">
 		<h3><?php echo __( "Step 3 : Add yours Client ID and Client Secret" ,'wpSlackManager' ); ?></h3>
 		<p>Paste here your Client ID and Secret</p>
@@ -53,20 +72,25 @@
 			<input type="text" name="client_id" class="small" value="<?php echo $this->_token->client_id(); ?>">
 			<label for="client_secret">Client Secret</label>
 			<input type="password" name="client_secret" class="small" value="<?php echo $this->_token->client_secret(); ?>">
-			<p class="action"><button action="submit" class="btn" >Edit</button></p>
+			<p class="action">
+				<button action="submit" class="btn" >Edit</button>
+			</p>
 		</form>
 	</div>
 
+	<!--	Step 4
+	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
 	<div class="card">
 		<h3><?php echo __( "Step 4 : Connect to your account", "wpSlackManager" ); ?></h3>
-		<?php if ( $this->_token->client_id() ) {  ?>
+
+		<?php if ( $this->_token->client_id() ) { // if client_id, display button ?>
 			<p><?php echo __( 'Click to connect your Slack account !', 'wpSlackManager' ); ?></p>
 			<p>
 				<a href="https://slack.com/oauth/authorize?scope=identity.basic,identity.team&client_id=<?php echo $this->_token->client_id(); ?>">
 					<img src="https://api.slack.com/img/sign_in_with_slack.png" />
 				</a>
 			</p>
-		<?php } else { ?>
+		<?php } else { //else display require message ?>
 			<p><?php echo __( "Complete Step 3 before connect your account !", "wpSlackManager" ) ?></p>
 		<?php } ?>
 	</div>

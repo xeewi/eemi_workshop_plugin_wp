@@ -1,5 +1,10 @@
 <?php
 
+/*	
+	Token object
+	wpSlackManager
+*/
+
 class wpSM_token_object {
 
 	private $_id;
@@ -10,12 +15,16 @@ class wpSM_token_object {
 	private $_scope;
 	private $_client_id;
 	private $_client_secret;
+	private $_code;
 
 	public function __construct(){ 
 		$this->_set_wp_user_ID( get_current_user_id() );
 	}
-	
+
+/*	Hydrate
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function hydrate($values){
+
 		if( !$values ){ return false; }
 		foreach ($values as $key => $value) {
 			$method = "set_" . $key;
@@ -25,6 +34,8 @@ class wpSM_token_object {
 		}
 	}
 
+/*	Getters
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function id(){ return $this->_id; }
 	public function wp_user_ID(){ return $this->_wp_user_ID; }
 	public function user_id(){ return $this->_user_id; }
@@ -33,7 +44,10 @@ class wpSM_token_object {
 	public function team_id(){ return $this->_team_id; }
 	public function client_id(){ return $this->_client_id; }
 	public function client_secret(){ return $this->_client_secret; }
+	public function code(){ return $this->_code; }
 
+/*	Setters
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function set_id($value){
 		if ( !is_int( intval( $value ) ) ) { return false; }
 		$this->_id = $value;
@@ -50,7 +64,7 @@ class wpSM_token_object {
 	}
 
 	public function set_user_id($value){
-		if ( !is_int($value) ) { return false; }
+		if ( !is_string($value) ) { return false; }
 		$this->_user_id = $value;
 	}
 
@@ -68,9 +82,15 @@ class wpSM_token_object {
 		if ( !is_string($value) ){ return false; }
 		$this->_client_id = $value;
 	}
+
 	public function set_client_secret( $value ){
 		if ( !is_string($value) ){ return false; }
 		$this->_client_secret = $value;
+	}
+
+	public function set_code( $value ){
+		if ( !is_string($value) ){ return false; }
+		$this->_code = $value;
 	}
 
 }

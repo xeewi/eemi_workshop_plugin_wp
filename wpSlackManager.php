@@ -13,9 +13,8 @@
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 if ( ! defined( 'WPINC' ) ) { exit; }
 
-require_once('class/wpSM.class.php');
+require_once( 'wpSM.class.php' );
 
 $manager = new wpSM;
 
-add_action( 'admin_enqueue_scripts', Array( $manager, "add_scripts" ) );
 add_action( 'init', Array( $manager, "init" ) );

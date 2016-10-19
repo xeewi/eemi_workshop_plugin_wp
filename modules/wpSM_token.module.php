@@ -1,15 +1,24 @@
 <?php
-require_once(WP_PLUGIN_DIR . '/wpSlackManager/object/wpSM_token.object.php');
-require_once(WP_PLUGIN_DIR . '/wpSlackManager/service/wpSM_token.service.php');
+
+/*	
+	Token module
+	wpSlackManager
+*/
+
+require_once(WP_PLUGIN_DIR . '/wpSlackManager/objects/wpSM_token.object.php');
+require_once(WP_PLUGIN_DIR . '/wpSlackManager/services/wpSM_token.service.php');
 
 class wpSM_token {
 
 	private $_service;
 
 	public function __construct(){
+		// Init service
 		$this->_service = new wpSM_token_service;
 	}
 
+/*	Get a token
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function get(){
 		$token = new wpSM_token_object;
 		$this->_service->get( $token );
@@ -19,6 +28,8 @@ class wpSM_token {
 		return $token;
 	}
 
+/*	Edit token clients
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function edit_clients($token, $client_id, $client_secret){
 		if ( get_class($token) != "wpSM_token_object" ||
 			$token->access_token() || // Must revock access of current client
@@ -31,17 +42,17 @@ class wpSM_token {
 		$this->_service->edit($token);
 	}
 
-	public function edit_access_info($token, $access_token, $scope, $team_id){
+/*	Get access from Slack
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+	public function edit_access( $token, $code ){
 		if ( get_class($token) != "wpSM_token_object" ||
-			!$object->client_id() || // Require a client_id to be set
-			!is_string($access_token) ||
-			!is_string($scope) ||
-			!is_string($team_id)
+			!$token->client_id() || // Require a client_id to be set
+			!$token->client_secret() || // Require a client_secret to be set
+			!is_string($code)
 		) { return false; }
 
-		$token->set_access_token($access_token);
-		$token->set_scope($scope);
-		$token->set_team_id($team_id);
+		$token->set_code($code);
+		$this->_service->get_access($token);
 		$this->_service->edit($token);
 	}
 
