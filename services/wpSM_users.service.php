@@ -26,7 +26,6 @@ class wpSM_users_service extends wpSM_service {
 
 		$response = wp_remote_get( $url );
 		$json = json_decode( $response['body'] );
-		var_dump($json);
 
 		if ( !$json->ok ) { return false; }
 

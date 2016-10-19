@@ -22,8 +22,7 @@ class wpSM_users_object {
 /*	Hydrate
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function hydrate($values){
-
-		if( !$values ){ return false; }
+		if( !$values || !is_array($values) ){ return false; }
 		foreach ($values as $key => $value) {
 			$method = "set_" . $key;
 			if (method_exists($this, $method)) {

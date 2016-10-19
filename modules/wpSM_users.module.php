@@ -21,7 +21,14 @@ class wpSM_users {
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function get_list( $token, $presence = false ){
 		$members = $this->_service->get_list( $token, $presence );
-		var_dump($members);
+		$users   = Array();
+
+		foreach ($members as $key => $member) {
+			$user = new wpSM_users_object( (array) $member );
+			array_push($users, $user);
+		}
+
+		return $users;
 	} 
 
 /*	Get a user
