@@ -13,10 +13,15 @@ class wpSM {
 		$this->modules = Array(
 			'token' => new wpSM_token,
 		);
-		
-
+		add_action( 'admin_enqueue_scripts', Array( $this, "add_style" ) );
 		add_action( 'wp_loaded', Array( $this, "wp_loaded" ) );
 	}
+
+	public function add_style(){
+		wp_enqueue_style( 'wpSM_fonts', WP_PLUGIN_URL . "/wpSlackManager/asset/css/wpSM.fonts.css", false );
+		wp_enqueue_style( 'wpSM', WP_PLUGIN_URL . "/wpSlackManager/asset/css/wpSM.css", false );
+	}
+
 
 	public function wp_loaded(){
 
@@ -58,6 +63,8 @@ class wpSM {
 	}
 
 	public function home_discnt(){
+		if ( !$this->_token->client_id() ) {  }
+
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/disconnected.home.php' );
 	}
 
