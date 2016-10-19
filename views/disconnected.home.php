@@ -6,7 +6,16 @@
 		<div class="alert error">
 			<p>
 				<i class="fa fa-exclamation-circle" aria-hidden="true"></i> 
-				<?php echo __( "Missing Client ID or Client Secret", "wpSlackManager" ); ?>
+				<?php echo __( "Missing Client ID or Client Secret !", "wpSlackManager" ); ?>
+			</p>
+		</div>
+	<?php } ?>
+
+	<?php if ( isset($post_success) ) { ?>
+		<div class="alert success">
+			<p>
+				<i class="fa fa-check-circle-o" aria-hidden="true"></i>
+				<?php echo __( "Client ID and Client Secret added !", "wpSlackManager" ); ?>
 			</p>
 		</div>
 	<?php } ?>

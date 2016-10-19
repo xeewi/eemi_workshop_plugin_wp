@@ -34,14 +34,14 @@ class wpSM_token_object {
 	public function client_id(){ return $this->_client_id; }
 	public function client_secret(){ return $this->_client_secret; }
 
-	private function _set_wp_user_ID($value){
-		if ( !is_int( intval( $value ) ) ) { return false; }
-		$this->_wp_user_ID = $value;
-	}
-
 	public function set_id($value){
 		if ( !is_int( intval( $value ) ) ) { return false; }
 		$this->_id = $value;
+	}
+
+	private function _set_wp_user_ID($value){
+		if ( !is_int( intval( $value ) ) ) { return false; }
+		$this->_wp_user_ID = $value;
 	}
 
 	public function set_access_token($value){

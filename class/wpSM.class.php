@@ -68,8 +68,9 @@ class wpSM {
 	}
 
 	public function home_discnt(){
-		
+
 		if ( isset($_GET['error']) && $_GET['error'] == "post" ) { $post_error = true; }
+		if ( isset($_GET['success']) && $_GET['success'] == "post" ) { $post_success = true; }
 		
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/disconnected.home.php' );
 	}
@@ -79,8 +80,15 @@ class wpSM {
 	}
 
 	public function add_clients_discnt(){
-		var_dump($_POST);
-		wp_redirect( "admin.php?page=wpsm.disconnected.home&error=post" );
+		if ( !isset( $_POST ) ||
+			 !isset( $_POST[ 'client_id' ] ) ||
+			 !isset( $_POST[ 'client_secret' ] ) ) {
+			wp_redirect( "admin.php?page=wpsm.disconnected.home&error=post" );
+			exit;
+		}
+
+		$this->modules[ 'token' ]->edit_clients( $this->_token, $_POST[ "client_id" ], $_POST["client_secret"] );
+		wp_redirect( "admin.php?page=wpsm.disconnected.home&success=post" );
 		exit;
 	}
 

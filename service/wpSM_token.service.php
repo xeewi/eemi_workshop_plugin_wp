@@ -27,7 +27,7 @@ class wpSM_token_service {
 		$token_row = $wpdb->get_row( 
 			$wpdb->prepare( 
 				"SELECT * FROM $this->_table_name WHERE wp_user_ID = %d", 
-				$object->wp_user_ID()
+				esc_sql( $object->wp_user_ID() )
 			)
 		);
 
@@ -40,7 +40,7 @@ class wpSM_token_service {
 		if ( !$object->wp_user_ID() ){ return false; }
 
 		global $wpdb;
-		$wpdb->insert( $this->_table_name, Array( 'wp_user_ID' => $object->wp_user_ID() ) );
+		$wpdb->insert( $this->_table_name, Array( 'wp_user_ID' => esc_sql( $object->wp_user_ID() ) ) );
 		$object->set_id( $wpdb->insert_id );
 		$this->get( $object );
 	}
@@ -50,15 +50,18 @@ class wpSM_token_service {
 		if ( !$object->id() ){ return false; }
 
 		global $wpdb;
-		$wpdb->update( $this->_table_name, Array(
-			"wp_user_ID" => $object->wp_user_ID(),
-			"access_token" => $object->access_token(),
-			"user_id" => $object->user_id(),
-			"team_id" => $object->team_id(),
-			"scope" => $object->scope(),
-			"client_id" => $object->client_id(),
-			"client_secret" => $object->client_secret()
-		), Array( "id" => $object->id() ) );
+
+		$sql = Array();
+
+		if ( $object->wp_user_ID() ) 	{ $sql['wp_user_ID']    = esc_sql( $object->wp_user_ID() ); }
+		if ( $object->access_token() ) 	{ $sql['access_token']  = esc_sql( $object->access_token() ); }
+		if ( $object->user_id() ) 		{ $sql['user_id']       = esc_sql( $object->user_id() ); }
+		if ( $object->team_id() ) 		{ $sql['team_id']       = esc_sql( $object->team_id() ); }
+		if ( $object->scope() ) 		{ $sql['scope']         = esc_sql( $object->scope() ); }
+		if ( $object->client_id() ) 	{ $sql['client_id']     = esc_sql( $object->client_id() ); }
+		if ( $object->client_secret() ) { $sql['client_secret'] = esc_sql( $object->client_secret() ); }
+
+		$wpdb->update( $this->_table_name, $sql, Array( "id" => $object->id() ) );
 	}
 
 	public function delete( $object ) {
@@ -66,7 +69,7 @@ class wpSM_token_service {
 		if ( !$object->id() ){ return false; }
 
 		global $wpdb;
-		$wpdb->delete( $this->_table_name, Array( "id" => $object->id() ) );
+		$wpdb->delete( $this->_table_name, Array( "id" => esc_sql( $object->id() ) ) );
 	}
 
 	private function _create_table() {
