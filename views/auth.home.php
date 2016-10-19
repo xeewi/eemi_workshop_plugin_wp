@@ -81,13 +81,14 @@
 	<!--	Step 4
 	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
 	<div class="card">
-		<h3><?php echo __( "Step 4 : Connect to your account", "wpSlackManager" ); ?></h3>
+		<h3><?php echo __( "Step 4 : Add to Slack", "wpSlackManager" ); ?></h3>
 
 		<?php if ( $this->_token->client_id() ) { // if client_id, display button ?>
-			<p><?php echo __( 'Click to connect your Slack account !', 'wpSlackManager' ); ?></p>
-			<p>
-				<a href="https://slack.com/oauth/authorize?scope=identity.basic,identity.team&client_id=<?php echo $this->_token->client_id(); ?>">
-					<img src="https://api.slack.com/img/sign_in_with_slack.png" />
+			<p><?php echo __( 'Click to add your wpSlackManager to your Slack !', 'wpSlackManager' ); ?></p>
+				<a href="https://slack.com/oauth/authorize?scope=<?php echo $scopes; ?>&client_id=<?php echo $this->_token->client_id(); ?>">
+					<img alt="Add to Slack" height="40" width="139" 
+						src="https://platform.slack-edge.com/img/add_to_slack.png" 
+						srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" />
 				</a>
 			</p>
 		<?php } else { //else display require message ?>
