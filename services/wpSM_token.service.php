@@ -65,8 +65,8 @@ class wpSM_token_service extends wpSM_service {
 		$values = Array(
 			'access_token' => $json->access_token,
 			'scope'        => $json->scope,
-			'user_id'      => $json->user->id,
-			'team_id'      => $json->team->id
+			'user_id'      => $json->user_id,
+			'team_id'      => $json->team_id
 		);
 
 		$token->hydrate($values);
