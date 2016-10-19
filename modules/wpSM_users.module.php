@@ -19,6 +19,10 @@ class wpSM_users {
 
 /*	List users
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+	public function get_list( $token, $presence = false ){
+		$members = $this->_service->get_list( $token, $presence );
+		var_dump($members);
+	} 
 
 /*	Get a user
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/

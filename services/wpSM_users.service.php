@@ -17,8 +17,20 @@ class wpSM_users_service extends wpSM_service {
 
 /*	List users
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
-	public function list( $token, $presence = false ){
+	public function get_list( $token, $presence = false ){
+		if ( get_class( $token ) != "wpSM_token_object" ){ return false; }
+		if ( !$token->access_token() ){ return false; }
 
+		$url = $this->_slack_uri . "list?token=" . $token->access_token();
+		if ( $presence ) { $url .= "&presence=" . $presence; }
+
+		$response = wp_remote_get( $url );
+		$json = json_decode( $response['body'] );
+		var_dump($json);
+
+		if ( !$json->ok ) { return false; }
+
+		return $json->members;
 	}
 
 }

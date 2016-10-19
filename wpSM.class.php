@@ -3,16 +3,18 @@
 /*	wpSlackManager Plugin */
 
 require_once( WP_PLUGIN_DIR . '/wpSlackManager/modules/wpSM_token.module.php' );
+require_once( WP_PLUGIN_DIR . '/wpSlackManager/modules/wpSM_users.module.php' );
 
 class wpSM {
 
 	private $_token;
-	private $_modules;
+	private $modules;
 
 	public function __construct(){
 		// Init all modules
-		$this->_modules = Array(
+		$this->modules = Array(
 			'token' => new wpSM_token,
+			'users' => new wpSM_users,
 		);
 	}
 
@@ -25,7 +27,7 @@ class wpSM {
 /*	Setters
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function set_token(){
-		$this->_token = $this->_modules['token']->get();
+		$this->_token = $this->modules['token']->get();
 	}
 
 /*	Scripts
@@ -97,7 +99,7 @@ class wpSM {
 			exit;
 		}
 
-		$this->_modules[ 'token' ]->edit_clients( $this->_token, $_POST[ "client_id" ], $_POST["client_secret"] );
+		$this->modules[ 'token' ]->edit_clients( $this->_token, $_POST[ "client_id" ], $_POST["client_secret"] );
 		wp_redirect( "admin.php?page=wpsm.auth&success=post" );
 		exit;
 	}
@@ -105,7 +107,7 @@ class wpSM {
 	// Auth user (Step 4)
 	public function auth_user( $code ){
 		
-		$this->_modules['token']->edit_access( $this->_token, $code );
+		$this->modules['token']->edit_access( $this->_token, $code );
 		
 		if ( !$this->_token->access_token() ) {
 			wp_redirect( "admin.php?page=wpsm.auth&error=access_denied" );
@@ -139,7 +141,7 @@ class wpSM {
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	// Init dashboard
 	public function dashboard(){
-		
+		$users = $this->modules['users']->get_list( $this->_token );
 	}
 
 }
