@@ -21,13 +21,13 @@ class wpSM_token_service {
 
 	public function get( $object ) {
 		if ( get_class( $object ) != "wpSM_token_object" ){ return false; }
-		if ( !$object->user_id() ){ return false; }
+		if ( !$object->wp_user_id() ){ return false; }
 
 		global $wpdb;
 		$token_row = $wpdb->get_row( 
 			$wpdb->prepare( 
-				"SELECT * FROM $this->_table_name WHERE user_id = %d", 
-				$object->user_id() 
+				"SELECT * FROM $this->_table_name WHERE wp_user_ID = %d", 
+				$object->wp_user_ID()
 			)
 		);
 
@@ -37,10 +37,10 @@ class wpSM_token_service {
 	public function add( $object ) {
 		if ( get_class( $object ) != "wpSM_token_object" ){ return false; }
 		if ( $object->id() ){ return false; }
-		if ( !$object->user_id() ){ return false; }
+		if ( !$object->wp_user_ID() ){ return false; }
 
 		global $wpdb;
-		$wpdb->insert( $this->_table_name, Array( 'user_id' => $object->user_id() ) );
+		$wpdb->insert( $this->_table_name, Array( 'wp_user_ID' => $object->wp_user_ID() ) );
 		$object->set_id( $wpdb->insert_id );
 		$this->get( $object );
 	}
@@ -51,9 +51,11 @@ class wpSM_token_service {
 
 		global $wpdb;
 		$wpdb->update( $this->_table_name, Array(
+			"wp_user_ID" => $object->wp_user_ID(),
 			"access_token" => $object->access_token(),
-			"scope" => $object->scope(),
+			"user_id" => $object->user_id(),
 			"team_id" => $object->team_id(),
+			"scope" => $object->scope(),
 			"client_id" => $object->client_id(),
 			"client_secret" => $object->client_secret()
 		), Array( "id" => $object->id() ) );
@@ -75,14 +77,15 @@ class wpSM_token_service {
 		
 		$sql = "CREATE TABLE IF NOT EXISTS $this->_table_name (
 		  id mediumint(9) NOT NULL AUTO_INCREMENT,
-		  user_id bigint(20) UNSIGNED NOT NULL,
+		  wp_user_ID bigint(20) UNSIGNED NOT NULL,
+		  user_id varchar(255),
+		  team_id varchar(255),
 		  access_token varchar(255),
 		  scope varchar(255),
-		  team_id varchar(255),
 		  client_id varchar(255),
 		  client_secret varchar(255),
 		  PRIMARY KEY  (id),
-		  FOREIGN KEY (user_id) REFERENCES " . $wpdb->prefix . "users(ID)
+		  FOREIGN KEY (wp_user_ID) REFERENCES " . $wpdb->prefix . "users(ID)
 		) $charset_collate;";
 
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

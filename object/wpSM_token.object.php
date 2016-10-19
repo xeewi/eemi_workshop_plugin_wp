@@ -3,15 +3,16 @@
 class wpSM_token_object {
 
 	private $_id;
-	private $_access_token;
+	private $_wp_user_ID;
 	private $_user_id;
-	private $_scope;
 	private $_team_id;
+	private $_access_token;
+	private $_scope;
 	private $_client_id;
 	private $_client_secret;
 
 	public function __construct(){ 
-		$this->_set_user_id( get_current_user_id() );
+		$this->_set_wp_user_ID( get_current_user_id() );
 	}
 	
 	public function hydrate($values){
@@ -25,6 +26,7 @@ class wpSM_token_object {
 	}
 
 	public function id(){ return $this->_id; }
+	public function wp_user_ID(){ return $this->_wp_user_ID; }
 	public function user_id(){ return $this->_user_id; }
 	public function access_token(){ return $this->_access_token; }
 	public function scope(){ return $this->_scope; }
@@ -37,8 +39,13 @@ class wpSM_token_object {
 		$this->_id = $value;
 	}
 
-	private function _set_user_id($value){ // Used only on constructor
+	private function _set_wp_user_ID($value){ // Used only on constructor
 		if ( !is_int($value) ) { return false; }
+		$this->_wp_user_ID = $value;
+	}
+
+	public function _set_user_id($value){
+		if ( !is_string($value) ) { return false; }
 		$this->_user_id = $value;
 	}
 

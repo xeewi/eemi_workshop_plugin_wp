@@ -19,8 +19,11 @@ class wpSM {
 	}
 
 	public function wp_loaded(){
+
+		if ( !current_user_can("administrator") ) { return false; }
+
 		$this->_token = $this->modules['token']->get();
-		
+
 		if ( $this->_token->access_token() ) {
 			$this->connected();
 		} else {
