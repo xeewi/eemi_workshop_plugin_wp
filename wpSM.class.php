@@ -27,7 +27,7 @@ class wpSM {
 /*	Setters
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function set_token(){
-		$this->_token = $this->modules['token']->get();
+		$this->_token = $this->modules['token']->get_token();
 	}
 
 /*	Scripts
