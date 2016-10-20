@@ -170,6 +170,7 @@ class wpSM {
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	// Init dashboard
 	public function dashboard_home(){
+		$page = "dashboard";
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/dashboard.home.php' );
 	}
 
@@ -178,7 +179,7 @@ class wpSM {
 	// Users home
 	public function users_home(){
 
-		$page = "all"; // For menu
+		$page = "users"; // For menu
 		$users = $this->modules['users']->get_list( $this->_token, 1 );
 
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/users.home.php' );
@@ -198,7 +199,7 @@ class wpSM {
 			return false;
 		}
 
-		$page = ""; // For menu
+		$page = "users"; // For menu
 		
 		if ( isset($_GET['error']) && $_GET['error'] == "access_denied") { $error = true; }
 		if ( isset($_GET['success']) && $_GET['success'] == "post") { $success = true; }

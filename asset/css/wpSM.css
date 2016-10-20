@@ -330,8 +330,20 @@
 		color: #fff;
 	}
 
-	#wpSM #menu a.active i {
+	#wpSM #menu a.red_active {
+		background-color: #eb4d5c;
 		color: #fff;
+	}
+
+	#wpSM #menu a.green_active {
+		background-color: #93cc93;
+		color: #fff;
+	}
+
+	#wpSM #menu a.active i,
+	#wpSM #menu a.red_active i,
+	#wpSM #menu a.green_active i {
+		color: #fff !important;
 	}
 
 	#wpSM #menu a.active:hover {

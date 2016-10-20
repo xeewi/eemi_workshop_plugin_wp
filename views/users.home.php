@@ -12,7 +12,7 @@
 		<?php echo __( 'Users', 'wpSlackManager' ); ?>
 	</p>
 
-	<?php require_once( 'users.menu.php' ); ?>
+	<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/menu.php' ); ?>
 
 	<div id="content">
 		<h3>
