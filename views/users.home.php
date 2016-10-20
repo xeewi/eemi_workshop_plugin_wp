@@ -23,22 +23,21 @@
 		</div>
 		<div class="panel">
 			<?php foreach ($users as $key => $user) { ?>
-				<?php $profile = $user->profile(); ?>
 				<div class="panel-list">
-					<img class="thumb-72" src="<?php echo $profile['image_72'] ?>">
+					<img class="thumb-72" src="<?php echo $user->profile->image_72 ?>">
 					<div>
-						<h4><?php echo $profile['real_name_normalized']; ?></h4>
+						<h4><?php echo $user->profile->real_name_normalized; ?></h4>
 						<p>
-							@<?php echo $user->name(); ?>
-							<?php if( $user->presence() == "active" ){ ?>
+							@<?php echo $user->name; ?>
+							<?php if( isset( $user->presence ) && $user->presence == "active" ){ ?>
 								<i class="fa fa-circle green-text" aria-hidden="true"></i>
 							<?php } ?>
-							<?php if( $user->presence() == "away" ){ ?>
+							<?php if( isset( $user->presence ) && $user->presence == "away" ){ ?>
 								<i class="fa fa-circle-o grey-light-text" aria-hidden="true"></i>
 							<?php } ?>
 						</p>
 
-						<?php if ( isset( $profile['bot_id'] ) || $user->id() == "USLACKBOT" ) { ?>
+						<?php if ( isset( $user->profile->bot_id ) || $user->id == "USLACKBOT" ) { ?>
 							<p><i class="fa fa-bolt" aria-hidden="true"></i> BOT</p>
 						<?php } ?>
 					</div>

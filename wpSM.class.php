@@ -148,12 +148,20 @@ class wpSM {
 
 		// Users
 		add_submenu_page( 'wpsm.dashboard', 
-			'Users : Slack manager', 
+			__('Users : Slack manager', 'wpSlackManager'), 
 			__('Users', 'wpSlackManager'), 
 			'administrator',
 			'wpsm.users', 
 			Array( $this, 'users_home' )
 		);
+			// Users details
+			add_submenu_page( 'wpsm.users', 
+				__('User details : Slack manager', 'wpSlackManager'),  
+				__('User details', 'wpSlackManager'), 
+				'administrator',
+				'wpsm.users.details', 
+				Array( $this, 'users_home' )
+			);
 	}
 
 /*	Dashboard
