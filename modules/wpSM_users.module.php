@@ -51,4 +51,5 @@ class wpSM_users {
 		return $profile;
 	}
 
+
 }

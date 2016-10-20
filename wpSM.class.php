@@ -172,6 +172,7 @@ class wpSM {
 	// Init dashboard
 	public function dashboard_home(){
 		$page = "dashboard";
+
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/dashboard.home.php' );
 	}
 
