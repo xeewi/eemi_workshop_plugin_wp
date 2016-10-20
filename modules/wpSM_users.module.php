@@ -7,19 +7,16 @@
 
 require_once(WP_PLUGIN_DIR . '/wpSlackManager/services/wpSM_users.service.php');
 
-class wpSM_users {
-
-	private $_service;
+class wpSM_users extends wpSM_users_service {
 
 	public function __construct(){
-		// Init service
-		$this->_service = new wpSM_users_service;
+		parent::__construct();
 	}
 
 /*	List users
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function get_list( $token, $presence = false, $by_presence = false){
-		$members = $this->_service->get_list( $token, $presence );
+		$members = parent::get_list( $token, $presence );
 		if ( $by_presence ) {
 			$presence = Array();
 			foreach ($members as $key => $member) {
@@ -37,9 +34,9 @@ class wpSM_users {
 /*	Get an user
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function get( $token, $user_id, $presence = false ){
-		$user = $this->_service->get( $token, $user_id );
+		$user = parent::get( $token, $user_id );
 		if ( $presence ) {
-			$user->presence = $this->_service->get_presence( $token, $user_id );
+			$user->presence = parent::get_presence( $token, $user_id );
 		}
 		return $user;
 	}
