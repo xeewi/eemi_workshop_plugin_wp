@@ -8,7 +8,7 @@ require_once( WP_PLUGIN_DIR . '/wpSlackManager/modules/wpSM_users.module.php' );
 class wpSM {
 
 	private $_token;
-	private $modules;
+	public $modules;
 
 	public function __construct(){
 		// Init all modules
@@ -41,6 +41,7 @@ class wpSM {
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function init(){
 		add_action( 'admin_enqueue_scripts', Array( $this, "add_scripts" ) );
+		load_plugin_textdomain( 'wpSlackManager'); 
 		$this->init_admin();
 	}
 
@@ -133,6 +134,7 @@ class wpSM {
 	// Init connected
 	public function connected(){
 		add_action( "admin_menu", Array( $this, 'connected_menu' ) );
+		add_action( 'admin_post_edit_user_profile', Array( $this, 'edit_user_profile' ) );
 	}
 
 	// Add menu pages
@@ -154,13 +156,13 @@ class wpSM {
 			'wpsm.users', 
 			Array( $this, 'users_home' )
 		);
-			// Users details
-			add_submenu_page( 'wpsm.users', 
-				__('User details : Slack manager', 'wpSlackManager'),  
-				__('User details', 'wpSlackManager'), 
+			// Users info
+			add_submenu_page( null, 
+				__('User info : Slack manager', 'wpSlackManager'),  
+				__('User info', 'wpSlackManager'), 
 				'administrator',
-				'wpsm.users.details', 
-				Array( $this, 'users_home' )
+				'wpsm.users.info', 
+				Array( $this, 'users_info' )
 			);
 	}
 
@@ -173,12 +175,51 @@ class wpSM {
 
 /*	Users
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
-	// Init users
+	// Users home
 	public function users_home(){
+
 		$page = "all"; // For menu
 		$users = $this->modules['users']->get_list( $this->_token, 1 );
 
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/users.home.php' );
 	}
 
+	// User info
+	public function users_info(){
+		if ( !isset( $_GET['user_id'] ) || $_GET['user_id'] == NULL ) { 
+			require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/404.php' );
+			return false;
+		}
+
+		$user = $this->modules['users']->get( $this->_token, $_GET['user_id'], true );
+
+		if ( !$user ) {
+			require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/404.php' );
+			return false;
+		}
+
+		$page = ""; // For menu
+		
+		if ( isset($_GET['error']) && $_GET['error'] == "access_denied") { $error = true; }
+		if ( isset($_GET['success']) && $_GET['success'] == "post") { $success = true; }
+
+		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/users.info.php' );
+	}
+
+	// Edit user profile
+	public function edit_user_profile(){
+		if ( !isset( $_POST['user_id'] ) || 
+			!isset( $_POST['profile'] ) || 
+			!is_array( $_POST['profile'] ) ){ return false; }
+
+		$profile = $this->modules['users']->set_profile( $this->_token, $_POST['user_id'], $_POST['profile'] );
+		
+		if ( !$profile ){
+			wp_redirect( "admin.php?page=wpsm.users.info&user_id=" . $_POST['user_id'] . "&error=access_denied" );
+			exit;
+		}
+
+		wp_redirect( "admin.php?page=wpsm.users.info&user_id=" . $_POST['user_id'] . "&success=post" );
+		exit;
+	}
 }

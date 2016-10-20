@@ -1,0 +1,154 @@
+# Copyright (C) 2016 wpSlackManager
+# This file is distributed under the same license as the wpSlackManager package.
+msgid ""
+msgstr ""
+"Project-Id-Version: wpSlackManager 0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpSlackManager\n"
+"POT-Creation-Date: 2016-10-20 05:14:58+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: views/404.php:9 views/users.home.php:11 views/users.info.php:9
+msgid "Home"
+msgstr ""
+
+#: views/404.php:14
+msgid "Page not found !"
+msgstr ""
+
+#: views/404.php:15
+msgid "We're sorry  ¯\\_(ツ)_/¯"
+msgstr ""
+
+#: views/auth.home.php:16
+msgid "Missing Client ID or Client Secret !"
+msgstr ""
+
+#: views/auth.home.php:25
+msgid "Access denied ! Connection failed"
+msgstr ""
+
+#: views/auth.home.php:36
+msgid "Client ID and Client Secret added !"
+msgstr ""
+
+#: views/auth.home.php:44
+msgid "Step 1 : Create your app"
+msgstr ""
+
+#: views/auth.home.php:45
+msgid ""
+"* If you already got a Slack APP, you can skip this Step and directly go to "
+"Step 2"
+msgstr ""
+
+#: views/auth.home.php:46
+msgid "You need a Slack APP to use Slack Manager."
+msgstr ""
+
+#: views/auth.home.php:47
+msgid ""
+"Simply create it by clicking on the following link, and get yours Client ID "
+"and Client Secret. After creating your app, come back here for Step 2."
+msgstr ""
+
+#: views/auth.home.php:48
+msgid "Click here to create your Slack App !"
+msgstr ""
+
+#: views/auth.home.php:52
+msgid "Create App"
+msgstr ""
+
+#: views/auth.home.php:60
+msgid "Step 2 : Add Return URI to your Slack App"
+msgstr ""
+
+#: views/auth.home.php:61
+msgid "Select your app"
+msgstr ""
+
+#: views/auth.home.php:62
+msgid "Copy and paste the following return URI to your Slack App."
+msgstr ""
+
+#: views/auth.home.php:72
+msgid "Step 3 : Add yours Client ID and Client Secret"
+msgstr ""
+
+#: views/auth.home.php:89
+msgid "Step 4 : Add to Slack"
+msgstr ""
+
+#: views/auth.home.php:92
+msgid "Click to add your wpSlackManager to your Slack !"
+msgstr ""
+
+#: views/auth.home.php:100
+msgid "Complete Step 3 before connect your account !"
+msgstr ""
+
+#: views/users.home.php:12 views/users.info.php:10 views/users.menu.php:3
+#: wpSM.class.php:154
+msgid "Users"
+msgstr ""
+
+#: views/users.home.php:20
+msgid "All users"
+msgstr ""
+
+#: views/users.home.php:24
+msgid "Full users"
+msgstr ""
+
+#: views/users.home.php:50
+msgid "See more"
+msgstr ""
+
+#: views/users.info.php:19 wpSM.class.php:162
+msgid "User info"
+msgstr ""
+
+#: views/users.menu.php:7
+msgid "All"
+msgstr ""
+
+#: wpSM.class.php:77
+msgid "Disconnected : Slack Manager"
+msgstr ""
+
+#: wpSM.class.php:143
+msgid "Dashboard : Slack Manager"
+msgstr ""
+
+#: wpSM.class.php:153
+msgid "Users : Slack manager"
+msgstr ""
+
+#: wpSM.class.php:161
+msgid "User info : Slack manager"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "wpSlackManager"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/xeewi/eemi_workshop_plugin_wp"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Manage your Slack team from your WordPress dashboard"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Xeewi"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/xeewi/"
+msgstr ""

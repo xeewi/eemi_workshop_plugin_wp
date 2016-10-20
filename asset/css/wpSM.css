@@ -11,6 +11,10 @@
 		font-weight: 700;
 	}
 
+	#wpSM h2 a {
+		color: #000;
+	}
+
 	#wpSM h2 img {
 		margin : 0 0 -3px 0;
 	}
@@ -219,7 +223,7 @@
 
 	#wpSM .panel-actions {
 		background: #fff;
-		height: 30px;
+		min-height: 30px;
 		padding: 1rem;
 		border: 1px solid #e8e8e8;
 		margin-bottom: -1px;
@@ -265,6 +269,14 @@
 
 	#wpSM .panel-list div p, #wpSM .panel-list div h4 {
 		margin : 0 0 2px 0;
+	}
+
+	#wpSM .panel .action {
+		float: right;
+	}
+
+	#wpSM .panel .panel-list .action {
+		margin-top: 10px;
 	}
 
 
@@ -388,6 +400,17 @@
 		color : #93cc93 !important;
 	}
 
+	#wpSM .grey-text {
+		color : #95a5a6 !important;
+	}
+
 	#wpSM .grey-light-text {
 		color : #bdc3c7 !important;
+	}
+
+
+/*	Specific
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+	#wpSM div.error_page {
+		text-align: center;
 	}

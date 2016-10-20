@@ -1,8 +1,10 @@
 <div class="wrap" id="wpSM">
 	
 	<h2>
-		<img src="<?php echo WP_PLUGIN_URL . '/wpSlackManager/asset/img/icon.svg'; ?>">
-		slack <span>Manager</span>
+		<a href="?page=wpsm.dashboard">
+			<img src="<?php echo WP_PLUGIN_URL . '/wpSlackManager/asset/img/icon.svg'; ?>">
+			slack <span>Manager</span>
+		</a>
 	</h2>
 
 	<p>
@@ -19,12 +21,14 @@
 		</h3>
 
 		<div class="panel-head">
-			<a href="#" class="panel-option selected"><?php echo __('Full users', 'wpSlackManager'); ?></a>
+			<a href="?page=wpsm.users" class="panel-option selected"><?php echo __('Full users', 'wpSlackManager'); ?></a>
 		</div>
 		<div class="panel">
 			<?php foreach ($users as $key => $user) { ?>
 				<div class="panel-list">
-					<img class="thumb-72" src="<?php echo $user->profile->image_72 ?>">
+					<a href="?page=wpsm.users.info&user_id=<?php echo $user->id ?>">
+						<img class="thumb-72" src="<?php echo $user->profile->image_72 ?>">
+					</a>
 					<div>
 						<h4><?php echo $user->profile->real_name_normalized; ?></h4>
 						<p>
@@ -40,6 +44,11 @@
 						<?php if ( isset( $user->profile->bot_id ) || $user->id == "USLACKBOT" ) { ?>
 							<p><i class="fa fa-bolt" aria-hidden="true"></i> BOT</p>
 						<?php } ?>
+					</div>
+					<div class="action">
+						<a class="btn btn_outline" href="?page=wpsm.users.info&user_id=<?php echo $user->id ?>">
+							<?php echo __( 'See more', 'wpSlackManager' ); ?>
+						</a>
 					</div>
 				</div>
 			<?php }  ?>

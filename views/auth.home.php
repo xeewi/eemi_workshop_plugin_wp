@@ -1,6 +1,11 @@
 <div class="wrap" id="wpSM">
 
-	<h2><i class="fa fa-slack" aria-hidden="true"></i> Slack Manager</h2>
+	<h2>
+		<a href="?page=wpsm.auth">
+			<img src="<?php echo WP_PLUGIN_URL . '/wpSlackManager/asset/img/icon.svg'; ?>">
+			slack <span>Manager</span>
+		</a>
+	</h2>
 
 	<!--	Error alerts
 	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
