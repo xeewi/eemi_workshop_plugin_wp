@@ -1,11 +1,4 @@
-<div class="wrap" id="wpSM">
-
-	<h2>
-		<a href="?page=wpsm.auth">
-			<img src="<?php echo WP_PLUGIN_URL . '/wpSlackManager/asset/img/icon.svg'; ?>">
-			slack <span>Manager</span>
-		</a>
-	</h2>
+<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/header.include.php'  ); ?>
 
 	<!--	Error alerts
 	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
@@ -101,4 +94,4 @@
 		<?php } ?>
 	</div>
 	
-</div>
+<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/footer.include.php'  ); ?>

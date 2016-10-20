@@ -1,10 +1,4 @@
-<div class="wrap" id="wpSM">
-	
-	<h2>
-		<img src="<?php echo WP_PLUGIN_URL . '/wpSlackManager/asset/img/icon.svg'; ?>">
-		slack <span>Manager</span>
-	</h2>
-
+<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/header.include.php'  ); ?>
 	<!--	Error alerts
 	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
 	<?php if ( isset($error) ) { ?>
@@ -34,7 +28,7 @@
 		Info
 	</p>
 
-	<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/menu.php' ); ?>
+	<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/menu.include.php' ); ?>
 
 	<div id="content">
 		<h3>
@@ -94,4 +88,4 @@
 		</div>
 	</div>
 
-</div>
+<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/footer.include.php'  ); ?>

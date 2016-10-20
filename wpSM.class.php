@@ -134,12 +134,12 @@ class wpSM {
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	// Init connected
 	public function connected(){
-		add_action( "admin_menu", Array( $this, 'connected_menu' ) );
+		add_action( "admin_menu", Array( $this, 'wp_menu' ) );
 		add_action( 'admin_post_edit_user_profile', Array( $this, 'edit_user_profile' ) );
 	}
 
 	// Add menu pages
-	public function connected_menu(){
+	public function wp_menu(){
 		// Dashboard
 		add_menu_page( __('Dashboard : Slack Manager', 'wpSlackManager'), 
 			'Slack Manager', 
@@ -166,6 +166,10 @@ class wpSM {
 				Array( $this, 'users_info' )
 			);
 	}
+
+	public function menu( $page ){
+		
+	};
 
 /*	Dashboard
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/

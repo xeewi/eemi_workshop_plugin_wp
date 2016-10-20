@@ -1,10 +1,5 @@
-<div class="wrap" id="wpSM">
+<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/header.include.php'  ); ?>
 	
-	<h2>
-		<img src="<?php echo WP_PLUGIN_URL . '/wpSlackManager/asset/img/icon.svg'; ?>">
-		slack <span>Manager</span>
-	</h2>
-
 	<p>
 		<a class="ps" href="admin.php?page=wpsm.dashboard"> <?php echo __( 'Home', 'wpSlackManager' ); ?> </a> >
 		404
@@ -15,4 +10,5 @@
 		<h4><?php echo __("We're sorry  ¯\_(ツ)_/¯", "wpSlackManager" ); ?></h4>
 		<a class="btn" href="<?php echo wp_get_referer(); ?>">Back</a>
 	</div>
-</div>
+
+<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/footer.include.php'  ); ?>

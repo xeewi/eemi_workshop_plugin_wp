@@ -1,18 +1,11 @@
-<div class="wrap" id="wpSM">
-	
-	<h2>
-		<a href="?page=wpsm.dashboard">
-			<img src="<?php echo WP_PLUGIN_URL . '/wpSlackManager/asset/img/icon.svg'; ?>">
-			slack <span>Manager</span>
-		</a>
-	</h2>
+<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/header.include.php'  ); ?>
 
 	<p>
 		<a class="ps" href="admin.php?page=wpsm.dashboard"> <?php echo __( 'Home', 'wpSlackManager' ); ?> </a> >
 		<?php echo __( 'Users', 'wpSlackManager' ); ?>
 	</p>
 
-	<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/menu.php' ); ?>
+	<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/menu.include.php' ); ?>
 
 	<div id="content">
 		<h3>
@@ -54,4 +47,4 @@
 			<?php }  ?>
 		</div>
 	</div>
-</div>
+<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/footer.include.php'  ); ?>
