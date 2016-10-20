@@ -5,13 +5,12 @@
 	wpSlackManager
 */
 
-class wpSM_im {
+require_once(WP_PLUGIN_DIR . '/wpSlackManager/services/wpSM_im.service.php');
 
-	private $_service;
+class wpSM_im extends wpSM_im_service {
 
 	public function __construct(){
-		// Init service
-		$this->_service = new wpSM_users_service;
+		parent::__construct();
 	}
 
 }
