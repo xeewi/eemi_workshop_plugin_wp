@@ -9,11 +9,7 @@ require_once( 'wpSM.service.php' );
 
 class wpSM_users_service extends wpSM_service {
 
-	private $_slack_uri;
-
-	public function __construct() {	
-		$this->_slack_uri = parent::$slack_uri . 'users.'; 
-	}
+	public function __construct() {}
 
 /*	List users
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
@@ -21,7 +17,7 @@ class wpSM_users_service extends wpSM_service {
 		if ( get_class( $token ) != "wpSM_token_object" ){ return false; }
 		if ( !$token->access_token() ){ return false; }
 
-		$url = $this->_slack_uri . "list?token=" . $token->access_token();
+		$url = parent::$slack_uri . "users.list?token=" . $token->access_token();
 		if ( $presence ) { $url .= "&presence=" . $presence; }
 
 		$response = wp_remote_get( $url );
@@ -38,7 +34,7 @@ class wpSM_users_service extends wpSM_service {
 		if ( get_class( $token ) != "wpSM_token_object" ){ return false; }
 		if ( !$token->access_token() ){ return false; }
 
-		$url = $this->_slack_uri . "info?token=" . $token->access_token() . "&user=" . $user_id;
+		$url = parent::$slack_uri . "users.info?token=" . $token->access_token() . "&user=" . $user_id;
 
 		$response = wp_remote_get( $url );
 		$json = json_decode( $response['body'] );
@@ -54,7 +50,7 @@ class wpSM_users_service extends wpSM_service {
 		if ( get_class( $token ) != "wpSM_token_object" ){ return false; }
 		if ( !$token->access_token() ){ return false; }
 
-		$url = $this->_slack_uri . "getPresence?token=" . $token->access_token() . "&user=" . $user_id;
+		$url = parent::$slack_uri . "users.getPresence?token=" . $token->access_token() . "&user=" . $user_id;
 
 		$response = wp_remote_get( $url );
 		$json = json_decode( $response['body'] );
