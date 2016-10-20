@@ -137,20 +137,40 @@ class wpSM {
 
 	// Add menu pages
 	public function connected_menu(){
+		// Dashboard
 		add_menu_page( __('Dashboard : Slack Manager', 'wpSlackManager'), 
 			'Slack Manager', 
 			'administrator', 
 			'wpsm.dashboard', 
-			Array( $this, "dashboard" ), 
+			Array( $this, "dashboard_home" ), 
 			plugins_url( '/wpSlackManager/asset/img/icon-menu.svg' ) 
+		);
+
+		// Users
+		add_submenu_page( 'wpsm.dashboard', 
+			'Users : Slack manager', 
+			__('Users', 'wpSlackManager'), 
+			'administrator',
+			'wpsm.users', 
+			Array( $this, 'users_home' )
 		);
 	}
 
 /*	Dashboard
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	// Init dashboard
-	public function dashboard(){
-		$users = $this->modules['users']->get_list( $this->_token );
+	public function dashboard_home(){
+		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/dashboard.home.php' );
+	}
+
+/*	Users
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+	// Init users
+	public function users_home(){
+		$page = "all"; // For menu
+		$users = $this->modules['users']->get_list( $this->_token, 1 );
+
+		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/users.home.php' );
 	}
 
 }

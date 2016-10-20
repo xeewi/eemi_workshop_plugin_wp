@@ -24,9 +24,13 @@ class wpSM_users {
 		$users   = Array();
 
 		foreach ($members as $key => $member) {
-			$user = new wpSM_users_object( (array) $member );
+			$member = (array) $member;
+			$user = new wpSM_users_object( $member );
+			$user->set_profile( (array) $member['profile'] );
 			array_push($users, $user);
 		}
+
+		var_dump($users[1]);
 
 		return $users;
 	} 

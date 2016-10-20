@@ -14,6 +14,7 @@ class wpSM_users_object {
 	private $_is_admin;
 	private $_is_owner;
 	private $_profile;
+	private $_presence;
 
 	public function __construct( $values = false ){
 		if ( $values ) { $this->hydrate($values); } 
@@ -41,6 +42,7 @@ class wpSM_users_object {
 	public function is_admin(){ return $this->_is_admin; }
 	public function is_owner(){ return $this->_is_owner; }
 	public function profile(){ return $this->_profile; }
+	public function presence(){ return $this->_presence; }
 
 /*	Setters
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
@@ -73,6 +75,9 @@ class wpSM_users_object {
 		if ( !is_array( $value ) ){ return false; }
 		$this->_profile = $value;
 	}
-
+	public function set_presence( $value ){
+		if ( !is_string( $value ) ){ return false; }
+		$this->_presence = $value;
+	}
 
 }

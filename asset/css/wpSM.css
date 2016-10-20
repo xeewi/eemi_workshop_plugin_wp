@@ -11,10 +11,27 @@
 		font-weight: 700;
 	}
 
+	#wpSM h2 img {
+		margin : 0 0 -3px 0;
+	}
+
+	#wpSM h2 span {
+		color: #95a5a6;
+	}
+
+	#wpSM h3 i {
+		width: 30px;
+	}
+
+	#wpSM a {
+		text-decoration: none;
+		font-weight: 700;
+	}
+
 /*	Text styles
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 
-	#wpSM p.ps {
+	#wpSM .ps {
 		font-style: italic;
 		color: #424242;
 	}
@@ -94,18 +111,17 @@
 	}
 
 	#wpSM .btn_list {
-		padding: 2px 10px 0 10px;
+		padding: 5px 10px 2px 10px;
 		margin : 0 5px 0 5px;
 		text-decoration: none;
 		border-radius: 0.25rem;
 		color: #424242;
-
-		transition-duration: 0.1s;
+		font-weight: 300;
 	}
 
 	#wpSM .btn_list i {
 		color : #7f8c8d;
-		margin-right: 5px;
+		width: 25px;
 	}
 
 	#wpSM .btn_list:hover {
@@ -150,4 +166,228 @@
 	#wpSM .alert.success {
 		background-color: #2ab27b;
 		color: #fff;
+	}
+
+/*	Panel
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+
+	#wpSM .panel {
+		background: #fff;
+		border-radius: 0 0 .25rem .25rem;
+		box-shadow: 0 1px 0 rgba(0,0,0,.25);
+		padding: 2rem 2rem 1rem;
+		margin: 0 auto 3rem;
+		border: 1px solid #e8e8e8;
+	}
+
+	#wpSM .panel-head {
+		margin-bottom: -5px;
+	}
+
+	#wpSM .panel-option {
+		display: inline-block;
+		padding: 12px 32px 11px;
+		font-weight: 700;
+		margin-bottom: -1px;
+		border: 1px solid transparent;
+		border-top-right-radius: .25rem;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+		border-top-left-radius: .25rem;
+		background-clip: padding-box;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		max-width: 100%;
+	}
+
+	#wpSM .panel-option:hover {
+		text-decoration: underline;
+	}
+
+	#wpSM .panel-option.selected {
+		border: 1px solid #e8e8e8;
+		background: #fff;
+		border-bottom-color: #fff;
+		color: #555459;
+		cursor: default;
+	}
+
+	#wpSM .panel-option.selected:hover {
+		text-decoration: none;
+	}
+
+	#wpSM .panel-actions {
+		background: #fff;
+		height: 30px;
+		padding: 1rem;
+		border: 1px solid #e8e8e8;
+		margin-bottom: -1px;
+	}
+
+	#wpSM .panel-list {
+		line-height: 1.25rem;
+		color: #555459;
+		position: relative;
+		clear: both;
+
+		user-select: text;
+		word-break: break-word;
+		font-size: .9375rem;
+
+		margin: 0 1px 0 0;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		min-height: 48px;
+		border-radius: 0;
+		border-bottom: none;
+		border-top: 1px solid #e8e8e8;
+	}
+
+	#wpSM .panel-list:after{
+		clear: both;
+	}
+
+	#wpSM .panel-list img[class^="thumb"]{
+		display: inline-block;
+		margin-right: 10px;
+	}
+
+	#wpSM .panel-list div {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	#wpSM .panel-list div h4 {
+		font-size: 1.125rem;
+		font-weight: 700;
+	}
+
+	#wpSM .panel-list div p, #wpSM .panel-list div h4 {
+		margin : 0 0 2px 0;
+	}
+
+
+/*	Thumbs
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+
+	#wpSM img[class^="thumb"]{
+		border-radius: 0.25rem;
+	}
+
+	#wpSM .thumb-48 {
+		width: 48px;
+		height: 48px;
+	}
+
+	#wpSM .thumb-72 {
+		width: 72px;
+		height: 72px;
+	}
+
+/*	Menu
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+
+	#wpSM #menu {
+		float: left;
+		width : 14%;
+		padding: 0 1% 30px 2%;
+		margin-right: 2%;
+		border-right: 1px solid #bdc3c7;
+	}
+
+	#wpSM #menu a {
+		display: block;
+		margin: 5px 0 0 0;
+	}
+
+	#wpSM #menu a i {
+		color: #bdc3c7;
+	}
+
+	#wpSM #menu a:hover {
+		background-color: #bdc3c7;
+	}
+
+	#wpSM #menu a:hover i {
+		color: #fff;
+	}
+
+	#wpSM #menu a.active {
+		background-color: #3aa3e3;
+		color: #fff;
+	}
+
+	#wpSM #menu a.active i {
+		color: #fff;
+	}
+
+	#wpSM #menu a.active:hover {
+		background-color: #3aa3e3;
+	}
+
+	@media screen and (max-width: 700px){
+		#wpSM #menu {
+			display: block;
+			width: 100%;
+			border-right: 0;
+			padding: 10px;
+			margin: 10px 0 0 0;
+		}
+
+		#wpSM #menu a {
+			display: inline-block;
+			padding: 5px 20px 5px 20px;
+			border: 1px solid #C7CACD;
+			margin: 0 5px 0 5px;
+		}
+	}
+
+/*	Content
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+
+	#wpSM #content {
+		display: inline-block;
+		width : 78%;
+		padding: 0 2% 0 0%;
+	}
+
+	#wpSM #content h3 {
+		font-size: 2em;
+	}
+
+	#wpSM #content h3 i {
+		margin-left: 5px;
+		margin-right: 10px;
+	}
+
+	@media screen and (max-width: 700px){
+		#wpSM #content {
+			width: 100%;
+			padding: 10px;
+			margin: 10px 0 0 0;
+		}
+	}
+
+/*	Colors
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+
+	#wpSM .purple-text {
+		color : #7d60c5 !important;
+	}
+
+	#wpSM .red-text {
+		color : #eb4d5c !important;
+	}
+
+	#wpSM .red-bg {
+		background-color : #eb4d5c !important;
+	}
+
+	#wpSM .green-text {
+		color : #93cc93 !important;
+	}
+
+	#wpSM .grey-light-text {
+		color : #bdc3c7 !important;
 	}
