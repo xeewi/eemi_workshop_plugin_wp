@@ -170,8 +170,9 @@ class wpSM {
 	public function menu( $page ){
 		if ( !is_string( $page ) ) { return false; }
 		$menu = Array(
-			'page' => $page
+			'page' => $page,
 		);
+		
 		return $menu;
 	}
 
