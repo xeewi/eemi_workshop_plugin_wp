@@ -8,15 +8,8 @@ require_once( WP_PLUGIN_DIR . '/wpSlackManager/modules/wpSM_users.module.php' );
 class wpSM {
 
 	private $_token;
-	public $modules;
 
-	public function __construct(){
-		// Init all modules
-		$this->modules = Array(
-			'token' => new wpSM_token,
-			'users' => new wpSM_users,
-		);
-	}
+	public function __construct(){}
 
 /*	Getters
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
@@ -27,7 +20,9 @@ class wpSM {
 /*	Setters
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function set_token(){
-		$this->_token = $this->modules['token']->get_token();
+		$wpSM_token = new wpSM_token;
+		$this->_token = $wpSM_token->get_token();
+		unset($wpSM_token);
 	}
 
 /*	Scripts
@@ -110,7 +105,10 @@ class wpSM {
 			exit;
 		}
 
-		$this->modules[ 'token' ]->edit_clients( $this->_token, $_POST[ "client_id" ], $_POST["client_secret"] );
+		$wpSM_token = new wpSM_token;
+		$wpSM_token->edit_clients( $this->_token, $_POST[ "client_id" ], $_POST["client_secret"] );
+		unset($wpSM_token);
+
 		wp_redirect( "admin.php?page=wpsm.auth&success=post" );
 		exit;
 	}
@@ -118,7 +116,9 @@ class wpSM {
 	// Auth user (Step 4)
 	public function auth_user( $code ){
 		
-		$this->modules['token']->edit_access( $this->_token, $code );
+		$wpSM_token = new wpSM_token;
+		$wpSM_token->edit_access( $this->_token, $code );
+		unset($wpSM_token);
 		
 		if ( !$this->_token->access_token() ) {
 			wp_redirect( "admin.php?page=wpsm.auth&error=access_denied" );
@@ -190,7 +190,9 @@ class wpSM {
 	public function users_home(){
 
 		$menu = $this->menu( "users" );
-		$users = $this->modules['users']->get_list( $this->_token, 1 );
+		$wpSM_users = new wpSM_users;
+		$users = $wpSM_users->get_list( $this->_token, 1 );
+		unset($wpSM_users);
 
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/users.home.php' );
 	}
@@ -202,7 +204,9 @@ class wpSM {
 			return false;
 		}
 
-		$user = $this->modules['users']->get( $this->_token, $_GET['user_id'], true );
+		$wpSM_users = new wpSM_users;
+		$user = $wpSM_users->get( $this->_token, $_GET['user_id'], true );
+		unset($wpSM_users);
 
 		if ( !$user ) {
 			require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/404.php' );
@@ -223,8 +227,10 @@ class wpSM {
 			!isset( $_POST['profile'] ) || 
 			!is_array( $_POST['profile'] ) ){ return false; }
 
-		$profile = $this->modules['users']->set_profile( $this->_token, $_POST['user_id'], $_POST['profile'] );
-		
+		$wpSM_users = new wpSM_users;
+		$profile = $wpSM_users->set_profile( $this->_token, $_POST['user_id'], $_POST['profile'] );
+		unset($wpSM_users);
+
 		if ( !$profile ){
 			wp_redirect( "admin.php?page=wpsm.users.info&user_id=" . $_POST['user_id'] . "&error=access_denied" );
 			exit;
