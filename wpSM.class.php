@@ -4,6 +4,7 @@
 
 require_once( WP_PLUGIN_DIR . '/wpSlackManager/modules/wpSM_token.module.php' );
 require_once( WP_PLUGIN_DIR . '/wpSlackManager/modules/wpSM_users.module.php' );
+require_once( WP_PLUGIN_DIR . '/wpSlackManager/modules/wpSM_im.module.php' );
 
 class wpSM {
 
@@ -15,6 +16,7 @@ class wpSM {
 		$this->modules = Array(
 			'token' => new wpSM_token,
 			'users' => new wpSM_users,
+			'im' => new wpSM_im,
 		);
 	}
 
@@ -155,7 +157,7 @@ class wpSM {
 			__('Users', 'wpSlackManager'), 
 			'administrator',
 			'wpsm.users', 
-			Array( $this, 'users_home' )
+			Array( $this, 'users' )
 		);
 			// Users info
 			add_submenu_page( null, 
@@ -165,14 +167,29 @@ class wpSM {
 				'wpsm.users.info', 
 				Array( $this, 'users_info' )
 			);
+
+			// Direct message
+			add_submenu_page( null, 
+				__('Direct message : Slack manager', 'wpSlackManager'),  
+				__('Direct message', 'wpSlackManager'), 
+				'administrator',
+				'wpsm.im', 
+				Array( $this, 'users_info' )
+			);
 	}
 
 	public function menu( $page ){
 		if ( !is_string( $page ) ) { return false; }
-		$menu = Array(
-			'page' => $page,
-		);
+		$menu = Array( 'page' => $page );
 		
+		$ims = $this->modules['im']->get_list( $this->_token );
+		if ( $ims ) {
+			foreach ($ims as $key => $im) {
+				$im->user = $this->modules['users']->get( $this->_token, $im->user, true );
+			}
+			$menu['ims'] = $ims;
+		}
+
 		return $menu;
 	}
 
@@ -188,7 +205,7 @@ class wpSM {
 /*	Users
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	// Users home
-	public function users_home(){
+	public function users(){
 
 		$menu = $this->menu( "users" );
 		$users = $this->modules['users']->get_list( $this->_token, 1 );
@@ -234,4 +251,15 @@ class wpSM {
 		wp_redirect( "admin.php?page=wpsm.users.info&user_id=" . $_POST['user_id'] . "&success=post" );
 		exit;
 	}
+
+/*	Direct messages
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+	// User info
+	public function im(){
+
+		$menu = $this->menu( "users" );
+
+		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/users.info.php' );
+	}
+
 }

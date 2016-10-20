@@ -17,8 +17,21 @@
 
 	<h4><?php echo __( 'Channels', 'wpSlackManager' ); ?></h4>
 	<p>Coming soon</p>
-	<h4><?php echo __( 'Private messages', 'wpSlackManager' ); ?></h4>
-	<p>Coming soon</p>
+	<h4><?php echo __( 'Direct messages', 'wpSlackManager' ); ?></h4>
+	<?php if ( isset( $menu['ims'] ) && is_array( $menu['ims'] ) ) { ?>
+		<?php foreach ( $menu['ims'] as $key => $im ) { ?>
+			<a class="btn_list user"	href="?page=wpsm.users">
+				<?php if( $im->user->presence == "active" ){ ?>
+				<i class="green-text fa fa-circle" aria-hidden="true"></i>
+				<?php } else { ?>
+				<i class="grey-light-text fa fa-circle-o" aria-hidden="true"></i>
+				<?php } ?>
+				<?php echo $im->user->name; ?>
+			</a>	
+		<?php }  ?>
+	<?php } else { ?>
+	<p><?php echo __( 'No direct message', 'wpSlackManager' ); ?></p>
+	<?php } ?>
 	
 </div>
 <?php } ?>

@@ -325,6 +325,16 @@
 		color: #fff;
 	}
 
+	#wpSM #menu a.user {
+		border : 1px solid rgba(0,0,0,0);
+	}
+
+	#wpSM #menu a.user:hover {
+		color : inherit;
+		background-color: inherit;
+		border : 1px solid #bdc3c7;
+	}
+
 	#wpSM #menu a.active {
 		background-color: #3aa3e3;
 		color: #fff;

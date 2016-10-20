@@ -7,7 +7,7 @@
 
 require_once( 'wpSM.service.php' );
 
-class wpSM_users_service extends wpSM_service {
+class wpSM_im_service extends wpSM_service {
 
 	private $_slack_uri;
 
@@ -19,7 +19,7 @@ class wpSM_users_service extends wpSM_service {
 		if ( get_class( $token ) != "wpSM_token_object" ){ return false; }
 		if ( !$token->access_token() ){ return false; }
 
-		$url = parent::$slack_uri . "users.list?token=" . $token->access_token();
+		$url = parent::$slack_uri . "im.list?token=" . $token->access_token();
 
 		$response = wp_remote_get( $url );
 		$json = json_decode( $response['body'] );
