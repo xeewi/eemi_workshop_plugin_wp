@@ -67,7 +67,7 @@ class wpSM_users_service extends wpSM_service {
 		if ( !$token->access_token() ){ return false; }
 		if ( !is_array( $profile ) ) { return false; }
 
-		$url = $this->_slack_uri . "profile.set?token=" . $token->access_token() . "&user=" . $user_id . "&profile=" . json_encode($profile);
+		$url = parent::$slack_uri . "users.profile.set?token=" . $token->access_token() . "&user=" . $user_id . "&profile=" . json_encode($profile);
 
 		$response = wp_remote_get( $url );
 		$json = json_decode( $response['body'] );
