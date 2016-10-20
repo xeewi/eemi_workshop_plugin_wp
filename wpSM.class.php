@@ -15,8 +15,7 @@ class wpSM {
 		// Init all modules
 		$this->modules = Array(
 			'token' => new wpSM_token,
-			'users' => new wpSM_users,
-			'im' => new wpSM_im,
+			'users' => new wpSM_users
 		);
 	}
 
@@ -174,7 +173,7 @@ class wpSM {
 				__('Direct message', 'wpSlackManager'), 
 				'administrator',
 				'wpsm.im', 
-				Array( $this, 'users_info' )
+				Array( $this, 'im' )
 			);
 	}
 
@@ -182,7 +181,10 @@ class wpSM {
 		if ( !is_string( $page ) ) { return false; }
 		$menu = Array( 'page' => $page );
 		
-		$ims = $this->modules['im']->get_list( $this->_token );
+		$wpSM_im = new wpSM_im;
+		$ims = $wpSM_im->get_menu_list( $this->_token );
+		unset($wpSM_im);
+
 		if ( $ims ) {
 			foreach ($ims as $key => $im) {
 				$im->user = $this->modules['users']->get( $this->_token, $im->user, true );
@@ -257,9 +259,23 @@ class wpSM {
 	// User info
 	public function im(){
 
-		$menu = $this->menu( "users" );
+		$menu = $this->menu( "im" );
 
-		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/users.info.php' );
+		if ( !isset( $_GET['channel'] ) || $_GET['channel'] == "" ) { 
+			require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/404.php' );
+			return false;		
+		}
+
+		$wpSM_im = new wpSM_im;
+		$history = $wpSM_im->history( $this->_token, $_GET['channel'] );
+		unset($wpSM_im);
+
+		if ( !$history ) {
+			require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/404.php' );
+			return false;	
+		}
+		
+		// require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/users.info.	php' );
 	}
 
 }

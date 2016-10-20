@@ -20,7 +20,7 @@
 	<h4><?php echo __( 'Direct messages', 'wpSlackManager' ); ?></h4>
 	<?php if ( isset( $menu['ims'] ) && is_array( $menu['ims'] ) ) { ?>
 		<?php foreach ( $menu['ims'] as $key => $im ) { ?>
-			<a class="btn_list user"	href="?page=wpsm.users">
+			<a class="btn_list user" href="?page=wpsm.im&channel=<?php echo $im->id; ?>">
 				<?php if( $im->user->presence == "active" ){ ?>
 				<i class="green-text fa fa-circle" aria-hidden="true"></i>
 				<?php } else { ?>
