@@ -51,4 +51,11 @@ class wpSM_users {
 		return $profile;
 	}
 
+/*	Edit an user profile
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+	public function menu( $token ) {
+		$users = $this->get_list( $token, 1, true );
+		$menu = ""
+	}
+
 }
