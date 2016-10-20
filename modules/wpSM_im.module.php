@@ -13,4 +13,6 @@ class wpSM_im extends wpSM_im_service {
 		parent::__construct();
 	}
 
+
+
 }
