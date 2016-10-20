@@ -8,22 +8,19 @@
 require_once(WP_PLUGIN_DIR . '/wpSlackManager/objects/wpSM_token.object.php');
 require_once(WP_PLUGIN_DIR . '/wpSlackManager/services/wpSM_token.service.php');
 
-class wpSM_token {
-
-	private $_service;
+class wpSM_token extends wpSM_token_service {
 
 	public function __construct(){
-		// Init service
-		$this->_service = new wpSM_token_service;
+		parent::__construct();
 	}
 
 /*	Get a token
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
-	public function get(){
+	public function get_token(){
 		$token = new wpSM_token_object;
-		$this->_service->get( $token );
+		parent::get( $token );
 		if ( !$token->id() ) {
-			$this->_service->add($token);
+			parent::add($token);
 		}
 		return $token;
 	}
@@ -39,7 +36,7 @@ class wpSM_token {
 
 		$token->set_client_id($client_id);
 		$token->set_client_secret($client_secret);
-		$this->_service->edit($token);
+		parent::edit($token);
 	}
 
 /*	Get access from Slack
@@ -52,8 +49,8 @@ class wpSM_token {
 		) { return false; }
 
 		$token->set_code($code);
-		$this->_service->get_access($token);
-		$this->_service->edit($token);
+		parent::get_access($token);
+		parent::edit($token);
 	}
 
 }
