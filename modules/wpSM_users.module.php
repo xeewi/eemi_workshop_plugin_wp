@@ -44,7 +44,7 @@ class wpSM_users extends wpSM_users_service {
 /*	Edit an user profile
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function set_profile( $token, $user_id, $profile ){
-		$profile = $this->_service->set_profile( $token, $user_id, $profile );
+		$profile = parent::set_profile( $token, $user_id, $profile );
 		return $profile;
 	}
 
