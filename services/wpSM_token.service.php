@@ -77,8 +77,6 @@ class wpSM_token_service extends wpSM_service {
 			'scope'        => $json->scope,
 			'user_id'      => $json->user_id,
 			'team_id'      => $json->team_id,
-			'bot_id'       => $json->bot->bot_user_id,
-			'bot_token'    => $json->bot->bot_access_token
 		);
 
 		$token->hydrate($values);
@@ -170,7 +168,7 @@ class wpSM_token_service extends wpSM_service {
 		  user_id varchar(255),
 		  team_id varchar(255),
 		  access_token varchar(255),
-		  scope varchar(255),
+		  scope text,
 		  client_id varchar(255),
 		  client_secret varchar(255),
 		  bot_id varchar(255),

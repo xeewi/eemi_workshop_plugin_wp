@@ -99,16 +99,8 @@ class wpSM {
 		if ( isset($_GET['error']) && $_GET['error'] == "access_denied" ) { $access_error = true; }
 		if ( isset($_GET['success']) && $_GET['success'] == "post" ) { $post_success = true; }
 		
-		$scopes = "incoming-webhook,commands,bot," .
-		"channels:read,channels:write," .
-		"chat:write:bot,chat:write:user," .
-		"team:read," .
-		"users.profile:read,users.profile:write," .
-		"users:read,users:write," . 
-		"im:read,im:write,im:history," .
-		"rtm:stream";
-
-
+		$scopes = "client";
+		
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/auth.home.php' );
 	}
 
