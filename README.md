@@ -23,6 +23,7 @@ Coming soon
 ## Next step
 
 * WpUser chat as SlackBot
+* Channels chats
 * Revock access 
 
 ***
