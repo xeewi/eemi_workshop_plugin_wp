@@ -106,7 +106,7 @@ class wpSM {
 		"users.profile:read,users.profile:write," .
 		"users:read,users:write," . 
 		"im:read,im:write,im:history," .
-		"rtm:read,rtm:write";
+		"rtm:stream";
 
 
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/auth.home.php' );
