@@ -29,15 +29,27 @@ class wpSM {
 /*	Scripts
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function add_scripts(){
-		wp_enqueue_style( 'wpSM_fonts', WP_PLUGIN_URL . "/wpSlackManager/asset/css/wpSM.fonts.css", false );
 		wp_enqueue_style( 'wpSM', WP_PLUGIN_URL . "/wpSlackManager/asset/css/wpSM.css", false );
+		wp_enqueue_style( 'wpSM_fonts', WP_PLUGIN_URL . "/wpSlackManager/asset/css/wpSM.fonts.css", false );
+		
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'wpSM', WP_PLUGIN_URL . "/wpSlackManager/asset/js/wpsm.js", false );
+	}
+
+	public function add_admin_scripts(){
+		wp_enqueue_style( 'wpSM', WP_PLUGIN_URL . "/wpSlackManager/asset/css/wpSM.css", false );
+		wp_enqueue_style( 'wpSM_fonts', WP_PLUGIN_URL . "/wpSlackManager/asset/css/wpSM.fonts.css", false );
+		
+		wp_enqueue_script('jquery');
+		wp_enqueue_script( 'wpSM', WP_PLUGIN_URL . "/wpSlackManager/asset/js/wpsm.js", false );
+		wp_enqueue_script( 'wpSM_im', WP_PLUGIN_URL . "/wpSlackManager/asset/js/im.js", false );
 	}
 
 /*	Init
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function init(){
-		add_action( 'admin_enqueue_scripts', Array( $this, "add_scripts" ) );
 		load_plugin_textdomain( 'wpSlackManager'); 
+
 		$this->init_admin();
 	}
 
@@ -45,6 +57,8 @@ class wpSM {
 	public function init_admin(){
 		if ( !current_user_can("administrator") ) { return false; }
 		
+		add_action( 'admin_enqueue_scripts', Array( $this, "add_admin_scripts" ) );
+
 		$this->set_token();
 
 		if ( $this->_token->access_token() ) {
@@ -159,7 +173,7 @@ class wpSM {
 			Array( $this, 'users' )
 		);
 			// Users info
-			add_submenu_page( null, 
+			add_submenu_page( 'wpsm.users', 
 				__('User info : Slack manager', 'wpSlackManager'),  
 				__('User info', 'wpSlackManager'), 
 				'administrator',
@@ -167,30 +181,34 @@ class wpSM {
 				Array( $this, 'users_info' )
 			);
 
-			// Direct message
-			add_submenu_page( null, 
-				__('Direct message : Slack manager', 'wpSlackManager'),  
-				__('Direct message', 'wpSlackManager'), 
-				'administrator',
-				'wpsm.im', 
-				Array( $this, 'im' )
-			);
+		// Direct message
+		add_submenu_page( 'wpsm.users', 
+			__('Direct message : Slack manager', 'wpSlackManager'),  
+			__('Direct message', 'wpSlackManager'), 
+			'administrator',
+			'wpsm.im', 
+			Array( $this, 'im' )
+		);
 	}
 
-	public function menu( $page ){
+	public function menu( $page, $im_selected = false){
 		if ( !is_string( $page ) ) { return false; }
-		$menu = Array( 'page' => $page );
+		$menu = Array( 'page' => $page, 'wpsm_token' => $this->_token->access_token() );
 		
 		$wpSM_im = new wpSM_im;
 		$ims = $wpSM_im->get_menu_list( $this->_token );
 		unset($wpSM_im);
 
 		if ( $ims ) {
+			$wpSM_users = new wpSM_users;
 			foreach ($ims as $key => $im) {
-				$im->user = $this->modules['users']->get( $this->_token, $im->user, true );
+				$im->user = $wpSM_users->get( $this->_token, $im->user, true );
 			}
+			unset($wpSM_users);
 			$menu['ims'] = $ims;
 		}
+
+		if ( $im_selected && is_string( $im_selected ) ) { $menu['im_selected'] = $im_selected; }
 
 		return $menu;
 	}
@@ -265,9 +283,9 @@ class wpSM {
 	// User info
 	public function im(){
 
-		$menu = $this->menu( "im" );
-
-		if ( !isset( $_GET['channel'] ) || $_GET['channel'] == "" ) { 
+		if ( !isset( $_GET['channel'] ) || $_GET['channel'] == "" || 
+			!isset( $_GET['user'] ) || $_GET['user'] == "" ||
+			!isset( $_GET['wpsm_token'] ) || $_GET['wpsm_token'] == "" ) { 
 			require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/404.php' );
 			return false;		
 		}
@@ -281,7 +299,17 @@ class wpSM {
 			return false;	
 		}
 		
-		// require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/users.info.	php' );
+		$wpSM_users = new wpSM_users;
+		$user = $wpSM_users->get( $this->_token, $_GET['user'], true );
+		unset($wpSM_users);
+
+		if ( !$user ) {
+			require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/404.php' );
+			return false;
+		}
+
+		$menu = $this->menu( "im", $_GET['channel'] );
+		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/im.home.php' );
 	}
 
 }

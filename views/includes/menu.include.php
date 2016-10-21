@@ -19,8 +19,14 @@
 	<p>Coming soon</p>
 	<h4><?php echo __( 'Direct messages', 'wpSlackManager' ); ?></h4>
 	<?php if ( isset( $menu['ims'] ) && is_array( $menu['ims'] ) ) { ?>
-		<?php foreach ( $menu['ims'] as $key => $im ) { ?>
-			<a class="btn_list user" href="?page=wpsm.im&channel=<?php echo $im->id; ?>">
+		<?php 
+		foreach ( $menu['ims'] as $key => $im ) { 
+			$class = "btn_list user";
+			if ( isset( $menu['im_selected'] ) && $menu['im_selected'] == $im->id ){
+				$class = "btn_list user active";
+			} 
+		?>
+			<a class="<?php echo $class; ?>" href="?page=wpsm.im&channel=<?php echo $im->id; ?>&user=<?php echo $im->user->id; ?>&wpsm_token=<?php echo $menu['wpsm_token']; ?>">
 				<?php if( $im->user->presence == "active" ){ ?>
 				<i class="green-text fa fa-circle" aria-hidden="true"></i>
 				<?php } else { ?>

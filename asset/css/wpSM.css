@@ -184,6 +184,10 @@
 		border: 1px solid #e8e8e8;
 	}
 
+	#wpSM .panel.messages {
+		height: 300px;
+	}
+
 	#wpSM .panel-head {
 		margin-bottom: -5px;
 	}
@@ -373,7 +377,7 @@
 			display: inline-block;
 			padding: 5px 20px 5px 20px;
 			border: 1px solid #C7CACD;
-			margin: 0 5px 0 5px;
+			margin: 5px 5px 5px 5px;
 		}
 	}
 
@@ -430,6 +434,9 @@
 		color : #bdc3c7 !important;
 	}
 
+	#wpSM .blue-text {
+		color : #3498db !important;
+	}
 
 /*	Specific
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
