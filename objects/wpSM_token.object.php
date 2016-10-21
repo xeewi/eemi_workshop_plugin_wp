@@ -15,6 +15,8 @@ class wpSM_token_object {
 	private $_scope;
 	private $_client_id;
 	private $_client_secret;
+	private $_bot_id;
+	private $_bot_token;
 	private $_code;
 
 	public function __construct(){ 
@@ -44,6 +46,8 @@ class wpSM_token_object {
 	public function team_id(){ return $this->_team_id; }
 	public function client_id(){ return $this->_client_id; }
 	public function client_secret(){ return $this->_client_secret; }
+	public function bot_id(){ return $this->_bot_id; }
+	public function bot_token(){ return $this->_bot_token; }
 	public function code(){ return $this->_code; }
 
 /*	Setters
@@ -86,6 +90,16 @@ class wpSM_token_object {
 	public function set_client_secret( $value ){
 		if ( !is_string($value) ){ return false; }
 		$this->_client_secret = $value;
+	}
+
+	public function set_bot_id( $value ){
+		if ( !is_string($value) ){ return false; }
+		$this->_bot_id = $value;
+	}
+
+	public function set_bot_token( $value ){
+		if ( !is_string($value) ){ return false; }
+		$this->_bot_token = $value;
 	}
 
 	public function set_code( $value ){

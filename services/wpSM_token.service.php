@@ -47,6 +47,16 @@ class wpSM_token_service extends wpSM_service {
 		$token->hydrate($token_row);
 	}
 
+/*	Get bot user
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+	public function get_bot() {
+		global $wpdb;
+		
+		$token_rows = $wpdb->query( "SELECT bot_id, bot_token FROM $this->_table_name WHERE bot_id IS NOT NULL"	);
+		if ( $token_rows == 1 ) { return false; }
+		return $token_rows;
+	}
+
 /*	HTTP GET request for access_token to Slack
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function get_access( $token ){
@@ -66,7 +76,9 @@ class wpSM_token_service extends wpSM_service {
 			'access_token' => $json->access_token,
 			'scope'        => $json->scope,
 			'user_id'      => $json->user_id,
-			'team_id'      => $json->team_id
+			'team_id'      => $json->team_id,
+			'bot_id'       => $json->bot->bot_user_id,
+			'bot_token'    => $json->bot->bot_access_token
 		);
 
 		$token->hydrate($values);
@@ -122,7 +134,15 @@ class wpSM_token_service extends wpSM_service {
 			$sql['client_secret'] = esc_sql( $token->client_secret() ); 
 		} else { $sql['client_secret'] = NULL; }
 
-		$wpdb->update( $this->_table_name, $sql, Array( "id" => $token->id() ), Array( '%d', '%s', '%s', '%s', '%s', '%s', '%s' ), Array( '%d' ) );
+		if ( $token->bot_id() ) { 
+			$sql['bot_id'] = esc_sql( $token->bot_id() ); 
+		} else { $sql['bot_id'] = NULL; }
+
+		if ( $token->bot_token() ) { 
+			$sql['bot_token'] = esc_sql( $token->bot_token() ); 
+		} else { $sql['bot_token'] = NULL; }		
+
+		$wpdb->update( $this->_table_name, $sql, Array( "id" => $token->id() ), Array( '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ), Array( '%d' ) );
 	}
 
 /*	Delete token row
@@ -153,6 +173,8 @@ class wpSM_token_service extends wpSM_service {
 		  scope varchar(255),
 		  client_id varchar(255),
 		  client_secret varchar(255),
+		  bot_id varchar(255),
+		  bot_token varchar(255),
 		  PRIMARY KEY  (id),
 		  FOREIGN KEY (wp_user_ID) REFERENCES " . $wpdb->prefix . "users(ID)
 		) $charset_collate;";

@@ -1,5 +1,10 @@
-<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/header.include.php'  ); ?>
+<div class="wrap" id="wpSM">
 
+	<h2>
+		<img src="<?php echo WP_PLUGIN_URL . '/wpSlackManager/asset/img/icon.svg'; ?>">
+		slack <span>Manager</span>
+	</h2>
+	
 	<!--	Error alerts
 	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
 	<?php if ( isset($post_error) ) { ?>
@@ -62,7 +67,15 @@
 	<!--	Step 3
 	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
 	<div class="card">
-		<h3><?php echo __( "Step 3 : Add yours Client ID and Client Secret" ,'wpSlackManager' ); ?></h3>
+		<h3><?php echo __( "Step 3 : Create a bot", "wpSlackManager" ); ?></h3>
+		<p class="ps" > <a target="_blank" href="https://api.slack.com/apps"><?php echo __( "Select your app", "wpSlackManager" ); ?></a> > Bot Users <p>
+		<p><?php echo __("Create your Slack bot user and come back here.", "wpSlackManager" ); ?></p>
+	</div>
+
+	<!--	Step 4
+	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
+	<div class="card">
+		<h3><?php echo __( "Step 4 : Add yours Client ID and Client Secret" ,'wpSlackManager' ); ?></h3>
 		<p>Paste here your Client ID and Secret</p>
 		<form method="POST" action="admin-post.php">
 			<input type="hidden" name="action" value="add_clients_discnt">
@@ -76,10 +89,10 @@
 		</form>
 	</div>
 
-	<!--	Step 4
+	<!--	Step 5
 	<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>> -->
 	<div class="card">
-		<h3><?php echo __( "Step 4 : Add to Slack", "wpSlackManager" ); ?></h3>
+		<h3><?php echo __( "Step 5 : Add to Slack", "wpSlackManager" ); ?></h3>
 
 		<?php if ( $this->_token->client_id() ) { // if client_id, display button ?>
 			<p><?php echo __( 'Click to add your wpSlackManager to your Slack !', 'wpSlackManager' ); ?></p>
@@ -90,7 +103,7 @@
 				</a>
 			</p>
 		<?php } else { //else display require message ?>
-			<p><?php echo __( "Complete Step 3 before connect your account !", "wpSlackManager" ) ?></p>
+			<p><?php echo __( "Complete Step 4 before connect your account !", "wpSlackManager" ) ?></p>
 		<?php } ?>
 	</div>
 	
