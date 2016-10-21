@@ -20,6 +20,13 @@ Coming soon
 
 ***
 
+## Next step
+
+* WpUser chat as SlackBot
+* Revock access 
+
+***
+
 ## Subject
 
 Subject from EEMI.
