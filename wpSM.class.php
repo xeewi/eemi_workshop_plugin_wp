@@ -86,11 +86,11 @@ class wpSM {
 		$scopes = "incoming-webhook,commands,bot," .
 		"channels:read,channels:write," .
 		"chat:write:bot,chat:write:user," .
-		"groups:read,groups:write," . 
 		"team:read," .
 		"users.profile:read,users.profile:write," .
 		"users:read,users:write," . 
-		"im:read,im:write,im:history";
+		"im:read,im:write,im:history" .
+		"rtm:read,rtm:write";
 
 
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/auth.home.php' );
