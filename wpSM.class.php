@@ -89,7 +89,7 @@ class wpSM {
 		"team:read," .
 		"users.profile:read,users.profile:write," .
 		"users:read,users:write," . 
-		"im:read,im:write,im:history" .
+		"im:read,im:write,im:history," .
 		"rtm:read,rtm:write";
 
 
