@@ -1,6 +1,6 @@
 <?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/header.include.php'  ); ?>
 
-	<p>Home</p>
+	<p><?php echo __('Home',"wpSlackManager"); ?></p>
 
 	<?php require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/includes/menu.include.php' ); ?>
 

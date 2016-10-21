@@ -48,8 +48,7 @@ class wpSM {
 /*	Init
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	public function init(){
-		load_plugin_textdomain( 'wpSlackManager'); 
-
+		$test = load_plugin_textdomain( 'wpSlackManager', false, "/wpSlackManager/languages" ); 
 		$this->init_admin();
 	}
 
