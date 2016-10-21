@@ -440,17 +440,29 @@
 		border-radius: 0.25rem;
 	}
 
-	#chat::-webkit-scrollbar-track {
+	#chat.connect_error .content div p {
+		color: #bdc3c7 !important;
+	}
+
+	#chat.connect_error input {
+		color: #e74c3c !important;
+	}
+
+	#chat.connect_error input::-webkit-input-placeholder {
+		color: red;
+	}
+
+	#chat .content::-webkit-scrollbar-track {
 		border-radius: 10px;
 		background-color: rgba(0,0,0,0);
 	}
 
-	#chat::-webkit-scrollbar {
+	#chat .content::-webkit-scrollbar {
 		width: 5px;
 		background-color: rgba(0,0,0,0);
 	}
 
-	#chat::-webkit-scrollbar-thumb {
+	#chat .content::-webkit-scrollbar-thumb {
 		border-radius: 10px;
 		background-color: #bdc3c7;
 	}

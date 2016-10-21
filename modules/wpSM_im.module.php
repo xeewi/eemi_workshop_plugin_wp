@@ -6,7 +6,6 @@
 */
 
 require_once(WP_PLUGIN_DIR . '/wpSlackManager/services/wpSM_im.service.php');
-require_once(WP_PLUGIN_DIR . '/wpSlackManager/services/wpSM_im.service.php');
 
 class wpSM_im extends wpSM_im_service {
 
