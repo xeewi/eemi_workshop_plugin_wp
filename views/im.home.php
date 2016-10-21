@@ -38,7 +38,17 @@
 			</div>
 		</div>
 		<div class="panel messages">
-			
+			<div class="content" id="chat">
+				<?php foreach ($messages as $key => $message) { ?>
+				<div>
+					<p style="color:#<?php echo $message->user->color ?>;" ><?php echo $message->user->name ?></p>
+					<p><?php echo $message->text ?></p>
+				</div>
+				<?php } ?>		
+			</div>
+			<form id="#wpsm_send">
+				<input class="small" type="text" name="message" placeholder="Message">
+			</form>
 		</div>
 
 	</div>

@@ -32,6 +32,7 @@
 		font-weight: 700;
 	}
 
+
 /*	Text styles
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 
@@ -186,6 +187,30 @@
 
 	#wpSM .panel.messages {
 		height: 300px;
+	}
+
+	#wpSM .panel.messages > .content {
+		height: 250px;
+		width: 100%;
+		overflow-y: scroll;
+	}
+
+	#wpSM .panel.messages > .content > div {
+	}
+
+	#wpSM .panel.messages > .content > div > p:nth-child(1) {
+		width : 11%;
+		padding: 0 0 0 1%;
+		margin-right: 2%;
+		border-right: 1px solid #bdc3c7;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	#wpSM .panel.messages > .content > div > p:nth-child(2) {
+		width : 85%;
+		display: inline-block;
+		vertical-align: top;
 	}
 
 	#wpSM .panel-head {
@@ -405,6 +430,29 @@
 			padding: 10px;
 			margin: 10px 0 0 0;
 		}
+	}
+
+
+/*	Chat
+<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
+	#chat {
+		box-shadow: inset 0px 10px 15px -10px #656565;
+		border-radius: 0.25rem;
+	}
+
+	#chat::-webkit-scrollbar-track {
+		border-radius: 10px;
+		background-color: rgba(0,0,0,0);
+	}
+
+	#chat::-webkit-scrollbar {
+		width: 5px;
+		background-color: rgba(0,0,0,0);
+	}
+
+	#chat::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		background-color: #bdc3c7;
 	}
 
 /*	Colors

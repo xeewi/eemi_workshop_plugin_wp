@@ -41,6 +41,7 @@ class wpSM {
 		wp_enqueue_style( 'wpSM_fonts', WP_PLUGIN_URL . "/wpSlackManager/asset/css/wpSM.fonts.css", false );
 		
 		wp_enqueue_script('jquery');
+		wp_enqueue_script( 'socket_io', WP_PLUGIN_URL . "/wpSlackManager/asset/js/socket.io.js", false );
 		wp_enqueue_script( 'wpSM', WP_PLUGIN_URL . "/wpSlackManager/asset/js/wpsm.js", false );
 		wp_enqueue_script( 'wpSM_im', WP_PLUGIN_URL . "/wpSlackManager/asset/js/im.js", false );
 	}
@@ -217,8 +218,6 @@ class wpSM {
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	// Init dashboard
 	public function dashboard_home(){
-		$wpSM_token = new wpSM_token;
-		$wpSM_token->get_bot();
 		$page = "dashboard";
 		$menu = $this->menu( "dashboard" );
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/dashboard.home.php' );
@@ -293,16 +292,24 @@ class wpSM {
 		}
 
 		$wpSM_im = new wpSM_im;
-		$history = $wpSM_im->history( $this->_token, $_GET['channel'] );
+		$messages = $wpSM_im->get_messages( $this->_token, $_GET['channel'] );
 		unset($wpSM_im);
-
-		if ( !$history ) {
-			require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/404.php' );
-			return false;	
-		}
 		
+		$users = Array();
 		$wpSM_users = new wpSM_users;
-		$user = $wpSM_users->get( $this->_token, $_GET['user'], true );
+		foreach ($messages as $key => $message) {
+			if ( array_key_exists($message->user, $users) ){ 
+				$message->user = $users[$message->user];
+			} else {
+				$users[$message->user] = $wpSM_users->get( $this->_token, $message->user, true );
+				$message->user = $users[$message->user];
+			}
+		}
+		if ( array_key_exists($_GET['user'], $users) ){
+			$user = $users[$_GET['user']];
+		} else {
+			$user = $wpSM_users->get( $this->_token, $_GET['user'], true );
+		}
 		unset($wpSM_users);
 
 		if ( !$user ) {
