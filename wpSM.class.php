@@ -41,7 +41,6 @@ class wpSM {
 		wp_enqueue_style( 'wpSM_fonts', WP_PLUGIN_URL . "/wpSlackManager/asset/css/wpSM.fonts.css", false );
 		
 		wp_enqueue_script('jquery');
-		wp_enqueue_script( 'socket_io', WP_PLUGIN_URL . "/wpSlackManager/asset/js/socket.io.js", false );
 		wp_enqueue_script( 'wpSM', WP_PLUGIN_URL . "/wpSlackManager/asset/js/wpsm.js", false );
 		wp_enqueue_script( 'wpSM_im', WP_PLUGIN_URL . "/wpSlackManager/asset/js/im.js", false );
 	}

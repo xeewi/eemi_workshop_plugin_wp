@@ -46,7 +46,7 @@
 				</div>
 				<?php } ?>		
 			</div>
-			<form id="wpsm_send">
+			<form id="wpsm_send" action="#" >
 				<input class="small" type="text" name="message" placeholder="Message">
 			</form>
 		</div>
