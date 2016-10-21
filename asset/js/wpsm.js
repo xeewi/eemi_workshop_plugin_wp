@@ -22,7 +22,8 @@
                 self.chatbox_ws();
     		})
     		.fail(function(e){
-    			self.animations.chat_error( self.chatbox );
+                console.log(e);
+    			self.animations.chat_error( self.chatbox, e.responseText );
     		});
 		},
 
@@ -35,11 +36,22 @@
     		})
     		.done(function(json) {
     			if (json.ok == false) { dfd.reject( json.error ); return; }
-    			self.url = json.url;
+                var users = new Array;
+
+                for( var x in json.users ){
+                    users[json.users[x].id] = json.users[x];
+                } 
+
+                self.users = users;
+                self.current_user = users[json.self.id];
+                self.channels = json.channels;
+                self.ims = json.ims;
+                self.team = json.team;
+                self.url = json.url;
     			dfd.resolve();
     		})
-    		.fail(function() {
-    			dfd.reject( "HTTP error" );
+    		.fail(function(e) {
+    			dfd.reject(e);
     		});
 
     		return dfd.promise();
@@ -47,12 +59,14 @@
 
         start_ws : function(){
             this.socket = new WebSocket( this.url );
-            this.socket.onmessage = function(Event){
-                var event = Event.event;
-                var data = Event.data;
+            var self = this;
+            this.socket.onmessage = function(e){
+                var data = JSON.parse(e.data);
+                var event = data.type;
+                var data = data;
 
-                if ( typeof(this['on_' + event]) == 'function' ) {
-                    this['on_' + event]( data );
+                if ( typeof(self['on_' + event]) == 'function' ) {
+                    self['on_' + event]( data );
                 }
             };
         },
@@ -69,11 +83,22 @@
 
                 if ( message == "" ) { return false; }
                 self.send_message( message );
-                var template = '<div><p>me</p><p>' + message + '</p></div>';
+                var template = '<div><p style="color: #' + self.current_user.color + '" >' + self.current_user.name + '</p><p>' + message + '</p></div>';
                 var content = self.chatbox.children('.content');
                 content.append(template);
                 self.animations.scroll_bottom( content );
-            });        
+            });
+
+            this.on_message = this.event_current_message;    
+        },
+
+        event_current_message : function( data ){
+            console.log(data);
+            if ( data.channel != this.channel ) { return false; }
+            var template = '<div><p style="color: #' + this.users[data.user].color + '" >' + this.users[data.user].name + '</p><p>' + data.text + '</p></div>';
+            var content = this.chatbox.children('.content');
+            content.append(template);
+            this.animations.scroll_bottom( content );           
         },
 
         send_message : function( value ){
@@ -90,12 +115,13 @@
 
     	animations : {
     		scroll_bottom : function( element ){		
-    			element.scrollTop( element.height() );
+    			element.scrollTop( 100000000000 );
     		},
-    		chat_error : function ( element ){
+    		chat_error : function ( element, text ){
+                if (!text) { text = "Error, refresh please"; }
     			element.addClass( 'connect_error' );
     			element.children( '#wpsm_send' ).children('input').attr( 'name');
-    			element.children( '#wpsm_send' ).children('input').val('Error, refresh please.');
+    			element.children( '#wpsm_send' ).children('input').val( text );
     		}
     	},
     };

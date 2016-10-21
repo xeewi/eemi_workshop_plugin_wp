@@ -40,10 +40,12 @@
 		<div class="panel messages" id="chat">
 			<div class="content" >
 				<?php foreach ($messages as $key => $message) { ?>
-				<div>
-					<p style="color:#<?php echo $message->user->color ?>;" ><?php echo $message->user->name ?></p>
-					<p><?php echo $message->text ?></p>
-				</div>
+
+					<div>
+						<p style="color:#<?php echo $message->user->color ?>;" ><?php echo $message->user->name ?></p>
+						<p><?php echo $message->text ?></p>
+					</div>
+					
 				<?php } ?>		
 			</div>
 			<form id="wpsm_send" action="#" >
