@@ -179,6 +179,8 @@ class wpSM {
 <<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>	*/
 	// Init dashboard
 	public function dashboard_home(){
+		$wpSM_token = new wpSM_token;
+		$wpSM_token->get_bot();
 		$page = "dashboard";
 		$menu = $this->menu( "dashboard" );
 		require_once( WP_PLUGIN_DIR . '/wpSlackManager/views/dashboard.home.php' );

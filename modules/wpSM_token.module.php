@@ -53,4 +53,14 @@ class wpSM_token extends wpSM_token_service {
 		parent::edit($token);
 	}
 
+	public function get_bot(){
+		$token_rows = parent::get_bot();
+		if( !$token_rows ){ return false; }
+		
+		$bot = Array(
+			// "id" => $token_rows[0],
+			// "token" => ""
+		);
+	}
+
 }
